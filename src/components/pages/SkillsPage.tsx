@@ -134,7 +134,7 @@ export default function SkillsPage() {
                             </motion.div>
                           )}
                           
-                          <h3 className="font-heading uppercase text-2xl text-white group-hover:text-accent-orange tracking-wider font-black mb-3 transition-colors">
+                          <h3 className="font-heading uppercase text-2xl text-accent-orange tracking-wider font-black mb-3">
                             {skill.skillName}
                           </h3>
                           
@@ -144,22 +144,7 @@ export default function SkillsPage() {
                             </p>
                           )}
                           
-                          <div className="flex items-center justify-between mt-6 pt-6 border-t border-accent-orange/20 group-hover:border-accent-orange/40 transition-colors">
-                            {skill.proficiencyLevel && (
-                              <motion.span
-                                className="font-heading uppercase text-xs text-accent-orange tracking-wider font-bold"
-                                whileHover={{ scale: 1.05 }}
-                              >
-                                {skill.proficiencyLevel}
-                              </motion.span>
-                            )}
-                            
-                            {skill.yearsOfExperience !== undefined && (
-                              <span className="font-paragraph italic text-sm text-medium-gray">
-                                {skill.yearsOfExperience} {skill.yearsOfExperience === 1 ? 'year' : 'years'}
-                              </span>
-                            )}
-                          </div>
+
                         </motion.div>
                       </motion.div>
                     ))}
