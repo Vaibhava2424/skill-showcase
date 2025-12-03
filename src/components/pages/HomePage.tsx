@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'fra
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, FileText, Award, BookOpen } from 'lucide-react';
 
 // --- Types & Interfaces ---
 interface StatItem {
@@ -508,6 +508,129 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
+        </section>
+
+        {/* --- PROFILE SECTION --- */}
+        <section className="w-full bg-black py-32 px-4 md:px-8 relative overflow-hidden">
+          <div className="max-w-[110rem] mx-auto">
+            <AnimatedElement>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
+                {/* Profile Card */}
+                <div className="lg:col-span-1">
+                  <div className="sticky top-32 bg-charcoal border-2 border-accent-orange/30 p-8 hover:border-accent-orange transition-colors duration-300">
+                    {/* Profile Icon */}
+                    <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-accent-orange to-accent-orange-soft rounded-full flex items-center justify-center">
+                      <span className="text-4xl font-heading font-black text-black">VR</span>
+                    </div>
+                    
+                    {/* Name and Role */}
+                    <h2 className="font-heading text-3xl font-black text-white text-center mb-2">
+                      Vaibhava Raju<br/>Nadakuditi
+                    </h2>
+                    <p className="font-heading text-sm text-accent-orange text-center uppercase tracking-widest mb-6">
+                      Full-Stack Developer | Ethical Hacking Enthusiast
+                    </p>
+                    
+                    {/* Social Links */}
+                    <div className="flex justify-center gap-4 mb-8 border-t border-accent-orange/20 pt-6">
+                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-black border border-accent-orange/30 rounded-full flex items-center justify-center text-accent-orange hover:bg-accent-orange hover:text-black transition-all duration-300">
+                        <Github className="w-5 h-5" />
+                      </a>
+                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-black border border-accent-orange/30 rounded-full flex items-center justify-center text-accent-orange hover:bg-accent-orange hover:text-black transition-all duration-300">
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                      <a href="#" className="w-10 h-10 bg-black border border-accent-orange/30 rounded-full flex items-center justify-center text-accent-orange hover:bg-accent-orange hover:text-black transition-all duration-300" title="Resume 1">
+                        <FileText className="w-5 h-5" />
+                      </a>
+                      <a href="#" className="w-10 h-10 bg-black border border-accent-orange/30 rounded-full flex items-center justify-center text-accent-orange hover:bg-accent-orange hover:text-black transition-all duration-300" title="Resume 2">
+                        <FileText className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div className="lg:col-span-2 flex flex-col gap-12">
+                  {/* About Me */}
+                  <AnimatedElement delay={100}>
+                    <div>
+                      <h3 className="font-heading text-2xl font-black text-accent-orange uppercase tracking-wider mb-4">
+                        About Me
+                      </h3>
+                      <p className="font-paragraph text-lg text-light-gray leading-relaxed">
+                        I'm a passionate full-stack developer with a keen interest in ethical hacking and cybersecurity. With a strong foundation in computer science and hands-on experience through intensive coding bootcamps, I specialize in building secure, scalable web applications. I'm committed to continuous learning and staying at the forefront of technology trends.
+                      </p>
+                    </div>
+                  </AnimatedElement>
+
+                  {/* Education */}
+                  <AnimatedElement delay={200}>
+                    <div>
+                      <h3 className="font-heading text-2xl font-black text-accent-orange uppercase tracking-wider mb-6 flex items-center gap-3">
+                        <BookOpen className="w-6 h-6" />
+                        Education
+                      </h3>
+                      <div className="space-y-4">
+                        <div className="border-l-2 border-accent-orange/50 pl-6 py-2">
+                          <p className="font-heading text-white font-bold uppercase tracking-wider">
+                            B.Sc Computer Science
+                          </p>
+                          <p className="font-paragraph text-medium-gray italic">
+                            BITS Hyderabad
+                          </p>
+                        </div>
+                        <div className="border-l-2 border-accent-orange/50 pl-6 py-2">
+                          <p className="font-heading text-white font-bold uppercase tracking-wider">
+                            NxtWave CCBP 4.0
+                          </p>
+                          <p className="font-paragraph text-medium-gray italic">
+                            NIAT Program
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </AnimatedElement>
+
+                  {/* Skills */}
+                  <AnimatedElement delay={300}>
+                    <div>
+                      <h3 className="font-heading text-2xl font-black text-accent-orange uppercase tracking-wider mb-6 flex items-center gap-3">
+                        <Code2 className="w-6 h-6" />
+                        Technical Skills
+                      </h3>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'REST APIs', 'GraphQL', 'MongoDB', 'Python', 'JavaScript', 'HTML/CSS', 'Git'].map((skill, index) => (
+                          <div key={index} className="px-4 py-2 bg-charcoal border border-accent-orange/30 rounded text-center hover:border-accent-orange hover:bg-accent-orange/10 transition-all duration-300">
+                            <span className="font-heading text-sm text-white uppercase tracking-wider font-bold">
+                              {skill}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </AnimatedElement>
+
+                  {/* Certifications */}
+                  <AnimatedElement delay={400}>
+                    <div>
+                      <h3 className="font-heading text-2xl font-black text-accent-orange uppercase tracking-wider mb-6 flex items-center gap-3">
+                        <Award className="w-6 h-6" />
+                        Certifications
+                      </h3>
+                      <div className="border-l-2 border-accent-orange/50 pl-6 py-2">
+                        <p className="font-heading text-white font-bold uppercase tracking-wider">
+                          Ethical Hacking 101
+                        </p>
+                        <p className="font-paragraph text-medium-gray italic">
+                          NxtWave • 2025
+                        </p>
+                      </div>
+                    </div>
+                  </AnimatedElement>
+                </div>
+              </div>
+            </AnimatedElement>
+          </div>
         </section>
 
         {/* --- CTA / FOOTER PRELUDE --- */}
