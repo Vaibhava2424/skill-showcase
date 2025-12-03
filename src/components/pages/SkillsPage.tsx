@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Skills } from '@/entities';
+
+const skillVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.4,
+    },
+  }),
+};
 
 export default function SkillsPage() {
   const [skills, setSkills] = useState<Skills[]>([]);
@@ -31,7 +43,7 @@ export default function SkillsPage() {
   }, {} as Record<string, Skills[]>);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       <Header />
       
       {/* Hero Section */}
@@ -42,23 +54,27 @@ export default function SkillsPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="font-heading uppercase text-7xl md:text-8xl text-primary tracking-wider mb-6">
-            <span className="font-paragraph italic text-4xl md:text-5xl">Technical</span> EXPERTISE
+          <h1 className="font-heading uppercase text-7xl md:text-8xl text-white tracking-wider font-black mb-6">
+            <span className="text-accent-orange">Technical</span> EXPERTISE
           </h1>
-          <p className="font-paragraph italic text-xl text-primary max-w-3xl mx-auto">
+          <p className="font-paragraph italic text-xl text-light-gray max-w-3xl mx-auto">
             A comprehensive toolkit of technologies, frameworks, and methodologies honed through years of practice
           </p>
         </motion.div>
 
         {isLoading ? (
           <div className="text-center py-24">
-            <p className="font-heading uppercase text-xl text-primary tracking-wider">
+            <motion.p
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="font-heading uppercase text-xl text-accent-orange tracking-wider"
+            >
               Loading skills...
-            </p>
+            </motion.p>
           </div>
         ) : skills.length === 0 ? (
           <div className="text-center py-24">
-            <p className="font-heading uppercase text-xl text-primary tracking-wider">
+            <p className="font-heading uppercase text-xl text-accent-orange tracking-wider">
               No skills found
             </p>
           </div>
@@ -72,61 +88,83 @@ export default function SkillsPage() {
                 transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               >
                 <div className="mb-12">
-                  <h2 className="font-heading uppercase text-4xl md:text-5xl text-primary tracking-wider mb-2">
+                  <h2 className="font-heading uppercase text-4xl md:text-5xl text-white tracking-wider font-black mb-4">
                     {category}
                   </h2>
-                  <div className="w-24 h-1 bg-secondary mt-4" />
+                  <motion.div
+                    className="w-24 h-1 bg-accent-orange"
+                    initial={{ width: 0 }}
+                    animate={{ width: 96 }}
+                    transition={{ duration: 0.8, delay: categoryIndex * 0.1 + 0.2 }}
+                  />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {categorySkills.map((skill, index) => (
-                    <motion.div
-                      key={skill._id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="group"
-                    >
-                      <div className="border-2 border-primary p-8 hover:bg-secondary hover:border-secondary transition-all duration-300">
-                        {skill.skillImage && (
-                          <div className="w-16 h-16 mb-6">
-                            <Image
-                              src={skill.skillImage}
-                              alt={skill.skillName || 'Skill icon'}
-                              className="w-full h-full object-contain"
-                              width={64}
-                            />
-                          </div>
-                        )}
-                        
-                        <h3 className="font-heading uppercase text-2xl text-primary group-hover:text-secondary-foreground tracking-wider mb-3 transition-colors">
-                          {skill.skillName}
-                        </h3>
-                        
-                        {skill.description && (
-                          <p className="font-paragraph italic text-base text-primary group-hover:text-secondary-foreground mb-4 transition-colors">
-                            {skill.description}
-                          </p>
-                        )}
-                        
-                        <div className="flex items-center justify-between mt-6 pt-6 border-t border-primary/20 group-hover:border-secondary-foreground/20 transition-colors">
-                          {skill.proficiencyLevel && (
-                            <span className="font-heading uppercase text-xs text-primary group-hover:text-secondary-foreground tracking-wider transition-colors">
-                              {skill.proficiencyLevel}
-                            </span>
+                <motion.div
+                  layout
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  <AnimatePresence mode="popLayout">
+                    {categorySkills.map((skill, index) => (
+                      <motion.div
+                        key={skill._id}
+                        custom={index}
+                        variants={skillVariants}
+                        initial="hidden"
+                        animate="visible"
+                        layout
+                        className="group"
+                      >
+                        <motion.div
+                          className="border-2 border-accent-orange/30 p-8 h-full hover:border-accent-orange hover:bg-accent-orange/10 transition-all duration-300 cursor-pointer"
+                          whileHover={{ y: -5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {skill.skillImage && (
+                            <motion.div
+                              className="w-16 h-16 mb-6"
+                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <Image
+                                src={skill.skillImage}
+                                alt={skill.skillName || 'Skill icon'}
+                                className="w-full h-full object-contain"
+                                width={64}
+                              />
+                            </motion.div>
                           )}
                           
-                          {skill.yearsOfExperience !== undefined && (
-                            <span className="font-paragraph italic text-sm text-primary group-hover:text-secondary-foreground transition-colors">
-                              {skill.yearsOfExperience} {skill.yearsOfExperience === 1 ? 'year' : 'years'}
-                            </span>
+                          <h3 className="font-heading uppercase text-2xl text-white group-hover:text-accent-orange tracking-wider font-black mb-3 transition-colors">
+                            {skill.skillName}
+                          </h3>
+                          
+                          {skill.description && (
+                            <p className="font-paragraph italic text-base text-light-gray mb-4">
+                              {skill.description}
+                            </p>
                           )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                          
+                          <div className="flex items-center justify-between mt-6 pt-6 border-t border-accent-orange/20 group-hover:border-accent-orange/40 transition-colors">
+                            {skill.proficiencyLevel && (
+                              <motion.span
+                                className="font-heading uppercase text-xs text-accent-orange tracking-wider font-bold"
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                {skill.proficiencyLevel}
+                              </motion.span>
+                            )}
+                            
+                            {skill.yearsOfExperience !== undefined && (
+                              <span className="font-paragraph italic text-sm text-medium-gray">
+                                {skill.yearsOfExperience} {skill.yearsOfExperience === 1 ? 'year' : 'years'}
+                              </span>
+                            )}
+                          </div>
+                        </motion.div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -139,36 +177,36 @@ export default function SkillsPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="mt-24 bg-secondary p-12 text-center"
+            className="mt-24 bg-charcoal border-2 border-accent-orange/30 p-12 hover:border-accent-orange transition-colors"
           >
-            <h2 className="font-heading uppercase text-3xl text-secondary-foreground tracking-wider mb-8">
-              Continuous Learning & Growth
+            <h2 className="font-heading uppercase text-3xl text-white tracking-wider font-black mb-8 text-center">
+              Continuous Learning & <span className="text-accent-orange">Growth</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
-                <p className="font-heading uppercase text-5xl text-secondary-foreground tracking-wider mb-2">
-                  {skills.length}
-                </p>
-                <p className="font-paragraph italic text-lg text-secondary-foreground">
-                  Technical Skills
-                </p>
-              </div>
-              <div>
-                <p className="font-heading uppercase text-5xl text-secondary-foreground tracking-wider mb-2">
-                  {Object.keys(groupedSkills).length}
-                </p>
-                <p className="font-paragraph italic text-lg text-secondary-foreground">
-                  Skill Categories
-                </p>
-              </div>
-              <div>
-                <p className="font-heading uppercase text-5xl text-secondary-foreground tracking-wider mb-2">
-                  {Math.max(...skills.map(s => s.yearsOfExperience || 0))}+
-                </p>
-                <p className="font-paragraph italic text-lg text-secondary-foreground">
-                  Years Experience
-                </p>
-              </div>
+              {[
+                { label: skills.length, desc: 'Technical Skills' },
+                { label: Object.keys(groupedSkills).length, desc: 'Skill Categories' },
+                { label: Math.max(...skills.map(s => s.yearsOfExperience || 0)), desc: 'Years Experience' }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-center"
+                >
+                  <motion.p
+                    className="font-heading uppercase text-5xl text-accent-orange tracking-wider font-black mb-2"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    {stat.label}+
+                  </motion.p>
+                  <p className="font-paragraph italic text-lg text-light-gray">
+                    {stat.desc}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         )}

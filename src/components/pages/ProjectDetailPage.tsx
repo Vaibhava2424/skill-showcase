@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Projects } from '@/entities';
-import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Calendar, Code2 } from 'lucide-react';
 import { format } from 'date-fns';
 
 export default function ProjectDetailPage() {
@@ -29,12 +29,16 @@ export default function ProjectDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-black">
         <Header />
         <div className="max-w-[100rem] mx-auto px-8 py-24 text-center">
-          <p className="font-heading uppercase text-xl text-primary tracking-wider">
+          <motion.p
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="font-heading uppercase text-xl text-accent-orange tracking-wider"
+          >
             Loading project...
-          </p>
+          </motion.p>
         </div>
         <Footer />
       </div>
@@ -43,15 +47,15 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-black">
         <Header />
         <div className="max-w-[100rem] mx-auto px-8 py-24 text-center">
-          <p className="font-heading uppercase text-xl text-primary tracking-wider mb-4">
+          <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
             Project not found
           </p>
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-2 font-paragraph italic text-lg text-primary hover:opacity-70 transition-opacity"
+            className="inline-flex items-center gap-2 font-paragraph italic text-lg text-light-gray hover:text-accent-orange transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to portfolio
@@ -63,18 +67,29 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       <Header />
       
       {/* Back Button */}
       <div className="max-w-[100rem] mx-auto px-8 pt-8">
-        <Link
-          to="/portfolio"
-          className="inline-flex items-center gap-2 font-heading uppercase text-sm text-primary tracking-wider hover:opacity-70 transition-opacity"
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Projects
-        </Link>
+          <Link
+            to="/portfolio"
+            className="inline-flex items-center gap-2 font-heading uppercase text-sm text-light-gray tracking-wider hover:text-accent-orange transition-colors group"
+          >
+            <motion.div
+              animate={{ x: [-4, 0] }}
+              transition={{ duration: 0.6, repeat: Infinity }}
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </motion.div>
+            Back to Projects
+          </Link>
+        </motion.div>
       </div>
 
       {/* Project Hero */}
@@ -86,15 +101,19 @@ export default function ProjectDetailPage() {
         >
           <div className="mb-8">
             {project.category && (
-              <span className="inline-block font-heading uppercase text-xs text-secondary-foreground bg-secondary px-4 py-2 tracking-wider mb-4">
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-block font-heading uppercase text-xs text-black bg-accent-orange px-4 py-2 tracking-wider mb-4 font-bold"
+              >
                 {project.category}
-              </span>
+              </motion.span>
             )}
-            <h1 className="font-heading uppercase text-6xl md:text-7xl text-primary tracking-wider mb-6">
+            <h1 className="font-heading uppercase text-6xl md:text-7xl text-white tracking-wider font-black mb-6">
               {project.title}
             </h1>
             {project.description && (
-              <p className="font-paragraph italic text-2xl text-primary max-w-4xl">
+              <p className="font-paragraph italic text-2xl text-light-gray max-w-4xl">
                 {project.description}
               </p>
             )}
@@ -102,116 +121,154 @@ export default function ProjectDetailPage() {
 
           {/* Project Image */}
           {project.thumbnail && (
-            <div className="relative w-full aspect-[16/9] mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative w-full aspect-[16/9] mb-12 overflow-hidden bg-charcoal"
+            >
               <Image
                 src={project.thumbnail}
                 alt={project.title || 'Project image'}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 width={1600}
               />
-            </div>
+            </motion.div>
           )}
 
           {/* Project Details Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <h2 className="font-heading uppercase text-2xl text-primary tracking-wider mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h2 className="font-heading uppercase text-2xl text-accent-orange tracking-wider font-bold mb-6">
                 Project Details
               </h2>
               
               <div className="space-y-6">
                 {project.technologies && (
-                  <div>
-                    <p className="font-heading uppercase text-sm text-primary tracking-wider mb-2 opacity-70">
-                      Technologies
-                    </p>
-                    <p className="font-paragraph italic text-lg text-primary">
-                      {project.technologies}
-                    </p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    <div className="flex items-start gap-3">
+                      <Code2 className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-heading uppercase text-sm text-medium-gray tracking-wider mb-2 opacity-70">
+                          Technologies
+                        </p>
+                        <p className="font-paragraph italic text-lg text-light-gray">
+                          {project.technologies}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
                 )}
 
                 {project.completionDate && (
-                  <div>
-                    <p className="font-heading uppercase text-sm text-primary tracking-wider mb-2 opacity-70">
-                      Completion Date
-                    </p>
-                    <p className="font-paragraph italic text-lg text-primary flex items-center gap-2">
-                      <Calendar className="w-5 h-5" />
-                      {format(new Date(project.completionDate), 'MMMM yyyy')}
-                    </p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                  >
+                    <div className="flex items-start gap-3">
+                      <Calendar className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
+                      <div>
+                        <p className="font-heading uppercase text-sm text-medium-gray tracking-wider mb-2 opacity-70">
+                          Completion Date
+                        </p>
+                        <p className="font-paragraph italic text-lg text-light-gray">
+                          {format(new Date(project.completionDate), 'MMMM yyyy')}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
                 )}
 
                 {project.projectUrl && (
-                  <div>
-                    <p className="font-heading uppercase text-sm text-primary tracking-wider mb-2 opacity-70">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    <p className="font-heading uppercase text-sm text-medium-gray tracking-wider mb-2 opacity-70">
                       Live Project
                     </p>
                     <a
                       href={project.projectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 font-paragraph italic text-lg text-primary hover:opacity-70 transition-opacity"
+                      className="inline-flex items-center gap-2 font-heading uppercase text-sm text-accent-orange tracking-wider hover:text-accent-orange-soft transition-colors group"
                     >
                       Visit Website
-                      <ExternalLink className="w-5 h-5" />
+                      <motion.div
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </motion.div>
                     </a>
-                  </div>
+                  </motion.div>
                 )}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-secondary p-8">
-              <h2 className="font-heading uppercase text-2xl text-secondary-foreground tracking-wider mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-charcoal border-2 border-accent-orange/30 p-8"
+            >
+              <h2 className="font-heading uppercase text-2xl text-accent-orange tracking-wider font-bold mb-6">
                 Key Highlights
               </h2>
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-secondary-foreground mt-2 flex-shrink-0" />
-                  <p className="font-paragraph italic text-lg text-secondary-foreground">
-                    Innovative design approach with modern aesthetics
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-secondary-foreground mt-2 flex-shrink-0" />
-                  <p className="font-paragraph italic text-lg text-secondary-foreground">
-                    Fully responsive across all devices and screen sizes
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-secondary-foreground mt-2 flex-shrink-0" />
-                  <p className="font-paragraph italic text-lg text-secondary-foreground">
-                    Optimized performance and accessibility standards
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-secondary-foreground mt-2 flex-shrink-0" />
-                  <p className="font-paragraph italic text-lg text-secondary-foreground">
-                    Clean, maintainable code architecture
-                  </p>
-                </div>
+                {[
+                  'Innovative design approach with modern aesthetics',
+                  'Fully responsive across all devices and screen sizes',
+                  'Optimized performance and accessibility standards',
+                  'Clean, maintainable code architecture'
+                ].map((highlight, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="w-2 h-2 bg-accent-orange mt-2 flex-shrink-0" />
+                    <p className="font-paragraph italic text-lg text-light-gray">
+                      {highlight}
+                    </p>
+                  </motion.div>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* CTA Section */}
-          <div className="text-center py-12 border-t-2 border-primary/10">
-            <h3 className="font-heading uppercase text-3xl text-primary tracking-wider mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="text-center py-12 border-t-2 border-accent-orange/20"
+          >
+            <h3 className="font-heading uppercase text-3xl text-white tracking-wider font-black mb-4">
               Interested in similar work?
             </h3>
-            <p className="font-paragraph italic text-xl text-primary mb-8">
+            <p className="font-paragraph italic text-xl text-light-gray mb-8">
               Let's discuss your next project
             </p>
             <Link
               to="/portfolio"
-              className="inline-block border-2 border-primary px-8 py-4 hover:bg-primary hover:text-primary-foreground transition-colors"
+              className="inline-block border-2 border-accent-orange px-8 py-4 text-accent-orange font-heading uppercase text-sm tracking-wider font-bold hover:bg-accent-orange hover:text-black transition-all duration-300"
             >
-              <span className="font-heading uppercase text-sm tracking-wider">
-                View More Projects
-              </span>
+              View More Projects
             </Link>
-          </div>
+          </motion.div>
         </motion.div>
       </section>
 

@@ -1,14 +1,40 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Projects } from '@/entities';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 
 const categories = ['All', 'MERN', 'Responsive', 'AI', 'Other', 'Frontend'];
+
+const filterVariants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.3,
+    },
+  }),
+  exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.4,
+    },
+  }),
+  exit: { opacity: 0, y: 20, transition: { duration: 0.2 } },
+};
 
 export default function PortfolioPage() {
   const [projects, setProjects] = useState<Projects[]>([]);
@@ -40,7 +66,7 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black">
       <Header />
       
       {/* Hero Section */}
@@ -51,105 +77,161 @@ export default function PortfolioPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="font-heading uppercase text-7xl md:text-8xl text-primary tracking-wider mb-6">
-            <span className="font-paragraph italic text-4xl md:text-5xl">Selected</span> PROJECTS
+          <h1 className="font-heading uppercase text-7xl md:text-8xl text-white tracking-wider font-black mb-6">
+            <span className="text-accent-orange">Selected</span> PROJECTS
           </h1>
-          <p className="font-paragraph italic text-xl text-primary max-w-3xl mx-auto">
+          <p className="font-paragraph italic text-xl text-light-gray max-w-3xl mx-auto">
             A curated collection of digital experiences, innovative solutions, and creative explorations
           </p>
         </motion.div>
 
-        {/* Filter Buttons */}
+        {/* Filter Buttons - Stylish Animation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          className="flex flex-wrap justify-center gap-3 mb-16"
         >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveFilter(category)}
-              className={`px-6 py-3 font-heading uppercase text-sm tracking-wider transition-all ${
-                activeFilter === category
-                  ? 'bg-secondary text-secondary-foreground'
-                  : 'border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+          <AnimatePresence mode="wait">
+            {categories.map((category, i) => (
+              <motion.button
+                key={category}
+                custom={i}
+                variants={filterVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onClick={() => setActiveFilter(category)}
+                className={`relative px-6 py-3 font-heading uppercase text-sm tracking-wider font-bold transition-all duration-300 overflow-hidden group ${
+                  activeFilter === category
+                    ? 'bg-accent-orange text-black'
+                    : 'bg-charcoal text-light-gray border-2 border-accent-orange/30 hover:border-accent-orange'
+                }`}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-accent-orange/20"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.5 }}
+                />
+                <span className="relative z-10">{category}</span>
+              </motion.button>
+            ))}
+          </AnimatePresence>
         </motion.div>
 
         {/* Projects Grid */}
         {isLoading ? (
           <div className="text-center py-24">
-            <p className="font-heading uppercase text-xl text-primary tracking-wider">
+            <motion.p
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="font-heading uppercase text-xl text-accent-orange tracking-wider"
+            >
               Loading projects...
-            </p>
+            </motion.p>
           </div>
         ) : filteredProjects.length === 0 ? (
-          <div className="text-center py-24">
-            <p className="font-heading uppercase text-xl text-primary tracking-wider mb-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-24"
+          >
+            <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
               No projects found
             </p>
-            <p className="font-paragraph italic text-lg text-primary">
+            <p className="font-paragraph italic text-lg text-light-gray">
               Try selecting a different category
             </p>
-          </div>
+          </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project._id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Link
-                  to={`/portfolio/${project._id}`}
-                  className="group block"
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project._id}
+                  custom={index}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  layout
                 >
-                  <div className="relative overflow-hidden mb-4 aspect-[4/3]">
-                    {project.thumbnail && (
-                      <Image
-                        src={project.thumbnail}
-                        alt={project.title || 'Project thumbnail'}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        width={600}
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-heading uppercase text-xl text-primary tracking-wider group-hover:opacity-70 transition-opacity">
-                        {project.title}
-                      </h3>
-                      {project.category && (
-                        <span className="font-heading uppercase text-xs text-primary tracking-wider bg-secondary px-3 py-1 whitespace-nowrap">
-                          {project.category}
-                        </span>
+                  <Link
+                    to={`/portfolio/${project._id}`}
+                    className="group block h-full"
+                  >
+                    <div className="relative overflow-hidden mb-4 aspect-[4/3] bg-charcoal">
+                      {project.thumbnail && (
+                        <Image
+                          src={project.thumbnail}
+                          alt={project.title || 'Project thumbnail'}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          width={600}
+                        />
                       )}
+                      <motion.div
+                        className="absolute inset-0 bg-accent-orange opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 0.2 }}
+                      />
+                      
+                      {/* Hover overlay with category */}
+                      <motion.div
+                        className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                      >
+                        <motion.div
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          whileHover={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                          className="text-center"
+                        >
+                          <p className="font-heading uppercase text-accent-orange text-sm tracking-wider mb-2">
+                            View Project
+                          </p>
+                          <ExternalLink className="w-6 h-6 text-accent-orange mx-auto" />
+                        </motion.div>
+                      </motion.div>
                     </div>
                     
-                    {project.description && (
-                      <p className="font-paragraph italic text-base text-primary line-clamp-2">
-                        {project.description}
-                      </p>
-                    )}
-                    
-                    {project.technologies && (
-                      <p className="font-heading uppercase text-xs text-primary tracking-wider opacity-70">
-                        {project.technologies}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="font-heading uppercase text-xl text-white tracking-wider group-hover:text-accent-orange transition-colors">
+                          {project.title}
+                        </h3>
+                        {project.category && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="font-heading uppercase text-xs text-black bg-accent-orange px-3 py-1 whitespace-nowrap font-bold"
+                          >
+                            {project.category}
+                          </motion.span>
+                        )}
+                      </div>
+                      
+                      {project.description && (
+                        <p className="font-paragraph italic text-base text-light-gray line-clamp-2">
+                          {project.description}
+                        </p>
+                      )}
+                      
+                      {project.technologies && (
+                        <p className="font-heading uppercase text-xs text-medium-gray tracking-wider opacity-70">
+                          {project.technologies}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         )}
       </section>
 
