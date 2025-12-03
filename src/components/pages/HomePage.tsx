@@ -226,21 +226,72 @@ export default function HomePage() {
                         </h1>
                     </AnimatedElement>
 
-                    {/* Central Image - Abstract Technology Illustration */}
+                    {/* Central Image - Abstract Technology Illustration with Enhanced Animations */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none mix-blend-normal">
+                        {/* Animated Glow Background */}
+                        <motion.div 
+                            className="absolute inset-0 rounded-lg bg-gradient-to-br from-accent-orange/30 via-accent-orange-soft/20 to-transparent blur-3xl"
+                            animate={{
+                                opacity: [0.3, 0.6, 0.3],
+                                scale: [1, 1.1, 1],
+                            }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                        
+                        {/* Main Image Container with Multiple Animations */}
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-                            className="w-full h-full"
+                            animate={{ 
+                                opacity: 1, 
+                                scale: 1,
+                                y: [0, -15, 0],
+                                rotateZ: [0, 2, -2, 0],
+                            }}
+                            transition={{ 
+                                opacity: { duration: 1.2, ease: "easeOut", delay: 0.5 },
+                                scale: { duration: 1.2, ease: "easeOut", delay: 0.5 },
+                                y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.8 },
+                                rotateZ: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 },
+                            }}
+                            className="w-full h-full relative"
                         >
+                            {/* Subtle Color Shift Overlay */}
+                            <motion.div 
+                                className="absolute inset-0 rounded-lg bg-gradient-to-t from-accent-orange/10 via-transparent to-transparent pointer-events-none"
+                                animate={{
+                                    opacity: [0.1, 0.3, 0.1],
+                                }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                            />
+                            
                             <ParallaxImage 
                                 src="https://static.wixstatic.com/media/98427a_b27c25d095bd4786901b7b8234c3f04c~mv2.png?originWidth=448&originHeight=576"
                                 alt="Abstract technology illustration with geometric shapes and digital patterns"
-                                className="w-full h-full object-cover shadow-2xl shadow-accent-orange/20"
+                                className="w-full h-full object-cover shadow-2xl shadow-accent-orange/30 rounded-lg"
                                 speed={0.2}
                             />
                         </motion.div>
+
+                        {/* Floating Accent Elements */}
+                        <motion.div 
+                            className="absolute -top-6 -right-6 w-20 h-20 border-2 border-accent-orange/40 rounded-full pointer-events-none"
+                            animate={{
+                                y: [0, 20, 0],
+                                x: [0, 10, 0],
+                                opacity: [0.3, 0.6, 0.3],
+                            }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                        
+                        <motion.div 
+                            className="absolute -bottom-4 -left-4 w-16 h-16 border-2 border-accent-orange-soft/40 rounded-full pointer-events-none"
+                            animate={{
+                                y: [0, -15, 0],
+                                x: [0, -8, 0],
+                                opacity: [0.2, 0.5, 0.2],
+                            }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                        />
                     </div>
                 </div>
 
