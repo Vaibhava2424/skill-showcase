@@ -226,7 +226,7 @@ export default function HomePage() {
                         </h1>
                     </AnimatedElement>
 
-                    {/* Central Image - The "Motif" from inspiration */}
+                    {/* Central Image - Abstract Technology Illustration */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none mix-blend-normal">
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -235,8 +235,8 @@ export default function HomePage() {
                             className="w-full h-full"
                         >
                             <ParallaxImage 
-                                src="https://static.wixstatic.com/media/98427a_902ff53709a04d9faf6b946ecd604282~mv2.png?originWidth=448&originHeight=576"
-                                alt="Abstract creative portrait"
+                                src="https://static.wixstatic.com/media/98427a_b27c25d095bd4786901b7b8234c3f04c~mv2.png?originWidth=448&originHeight=576"
+                                alt="Abstract technology illustration with geometric shapes and digital patterns"
                                 className="w-full h-full object-cover shadow-2xl shadow-accent-orange/20"
                                 speed={0.2}
                             />
