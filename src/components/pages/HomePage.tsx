@@ -276,7 +276,7 @@ export default function HomePage() {
                             // <span className="font-paragraph italic text-5xl md:text-7xl lg:text-9xl text-accent-orange self-start md:self-center md:-ml-[30%] mb-2 md:mb-4">
                             //     The
                             // </span>
-                            // <span className="font-heading font-black text-[12vw] md:text-[11vw] text-white tracking-tighter uppercase">
+                            // <span className="font-paragraph italic text-5xl md:text-7xl lg:text-9xl text-accent-orange self-start md:self-center md:-ml-[30%] mb-2 md:mb-4">
                             //     Vaibhava
                             // </span>
                             <span className="font-heading font-black text-[12vw] md:text-[11vw] text-accent-orange tracking-tighter uppercase md:-mt-4">
