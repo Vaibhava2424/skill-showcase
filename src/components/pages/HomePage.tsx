@@ -232,19 +232,49 @@ export default function HomePage() {
                         </h1>
                     </AnimatedElement>
 
-                    {/* Central Image - The "Motif" from inspiration */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none mix-blend-normal">
+                    {/* Central Image - Abstract Animated Artwork */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none">
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-                            className="w-full h-full"
+                            className="w-full h-full relative"
                         >
-                            <ParallaxImage 
-                                src="https://static.wixstatic.com/media/98427a_902ff53709a04d9faf6b946ecd604282~mv2.png?originWidth=448&originHeight=576"
-                                alt="Abstract creative portrait"
-                                className="w-full h-full object-cover shadow-2xl shadow-accent-orange/20"
-                                speed={0.2}
+                            {/* Animated glow background */}
+                            <motion.div
+                                animate={{
+                                    boxShadow: [
+                                        "0 0 40px rgba(255, 106, 0, 0.4)",
+                                        "0 0 80px rgba(255, 106, 0, 0.6)",
+                                        "0 0 40px rgba(255, 106, 0, 0.4)"
+                                    ]
+                                }}
+                                transition={{ duration: 3, repeat: Infinity }}
+                                className="absolute inset-0 rounded-lg"
+                            />
+                            
+                            {/* Floating animation wrapper */}
+                            <motion.div
+                                animate={{
+                                    y: [0, -20, 0],
+                                    rotateZ: [0, 2, -2, 0]
+                                }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                                className="w-full h-full relative"
+                            >
+                                <ParallaxImage 
+                                    src="https://static.wixstatic.com/media/98427a_18b67c39bb794d7ead31f7095b3193bd~mv2.png?id=abstract-hero-art"
+                                    alt="Abstract geometric digital art with flowing shapes"
+                                    className="w-full h-full object-cover rounded-lg"
+                                    speed={0.2}
+                                />
+                            </motion.div>
+                            
+                            {/* Rotating border accent */}
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                className="absolute inset-0 border-2 border-transparent border-t-accent-orange border-r-accent-orange rounded-lg"
                             />
                         </motion.div>
                     </div>
