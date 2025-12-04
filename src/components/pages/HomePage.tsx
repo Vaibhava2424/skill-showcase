@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'fra
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
+import { BaseCrudService } from '@/integrations';
+import { Skills, Certificates } from '@/entities';
 import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 // --- Types & Interfaces ---
@@ -160,6 +162,31 @@ const ParallaxImage: React.FC<{ src: string; alt: string; className?: string; sp
 };
 
 export default function HomePage() {
+  // State for dynamic data
+  const [skills, setSkills] = useState<Skills[]>([]);
+  const [certificates, setCertificates] = useState<Certificates[]>([]);
+  const [isLoadingData, setIsLoadingData] = useState(true);
+
+  // Load skills and certificates on mount
+  useEffect(() => {
+    loadProfileData();
+  }, []);
+
+  const loadProfileData = async () => {
+    setIsLoadingData(true);
+    try {
+      const [skillsResult, certsResult] = await Promise.all([
+        BaseCrudService.getAll<Skills>('skills'),
+        BaseCrudService.getAll<Certificates>('certificates')
+      ]);
+      setSkills(skillsResult.items);
+      setCertificates(certsResult.items);
+    } catch (error) {
+      console.error('Error loading profile data:', error);
+    }
+    setIsLoadingData(false);
+  };
+
   // Scroll progress for global effects
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -336,15 +363,15 @@ export default function HomePage() {
         </section>
 
         {/* --- PROFILE SECTION --- */}
-        <section className="w-full bg-black py-24 md:py-32 relative overflow-hidden border-t border-white/10\">
-            <div className="max-w-[110rem] mx-auto px-4 md:px-8\">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16\">
+        <section className="w-full bg-black py-24 md:py-32 relative overflow-hidden border-t border-white/10">
+            <div className="max-w-[110rem] mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
                     {/* Profile Card - Left */}
-                    <div className="lg:col-span-1\">
+                    <div className="lg:col-span-1">
                         <AnimatedElement>
-                            <div className="sticky top-32 bg-charcoal border border-white/10 p-8 md:p-10 rounded-lg hover:border-accent-orange/50 transition-colors duration-500\">
+                            <div className="sticky top-32 bg-charcoal border border-white/10 p-8 md:p-10 rounded-lg hover:border-accent-orange/50 transition-colors duration-500">
                                 {/* Profile Avatar */}
-                                <div className="mb-8 flex justify-center\">
+                                <div className="mb-8 flex justify-center">
                                     <motion.div
                                         animate={{
                                             boxShadow: [
@@ -354,33 +381,33 @@ export default function HomePage() {
                                             ]
                                         }}
                                         transition={{ duration: 3, repeat: Infinity }}
-                                        className="w-32 h-32 rounded-full bg-gradient-to-br from-accent-orange to-accent-orange-soft flex items-center justify-center\">
-                                        <div className="w-28 h-28 rounded-full bg-black flex items-center justify-center\">
-                                            <Code2 className="w-14 h-14 text-accent-orange\" />
+                                        className="w-32 h-32 rounded-full bg-gradient-to-br from-accent-orange to-accent-orange-soft flex items-center justify-center">
+                                        <div className="w-28 h-28 rounded-full bg-black flex items-center justify-center">
+                                            <Code2 className="w-14 h-14 text-accent-orange" />
                                         </div>
                                     </motion.div>
                                 </div>
 
                                 {/* Name & Role */}
-                                <div className="text-center mb-6\">
-                                    <h3 className="font-heading font-black text-2xl md:text-3xl text-white mb-2 uppercase\">
+                                <div className="text-center mb-6">
+                                    <h3 className="font-heading font-black text-2xl md:text-3xl text-white mb-2 uppercase">
                                         {PROFILE_DATA.name}
                                     </h3>
-                                    <p className="font-paragraph text-accent-orange text-sm md:text-base italic mb-2\">
+                                    <p className="font-paragraph text-accent-orange text-sm md:text-base italic mb-2">
                                         {PROFILE_DATA.role}
                                     </p>
-                                    <p className="font-paragraph text-medium-gray text-xs md:text-sm\">
+                                    <p className="font-paragraph text-medium-gray text-xs md:text-sm">
                                         📍 {PROFILE_DATA.location}
                                     </p>
                                 </div>
 
                                 {/* Bio */}
-                                <p className="font-paragraph text-light-gray/80 text-sm leading-relaxed mb-8 text-center\">
+                                <p className="font-paragraph text-light-gray/80 text-sm leading-relaxed mb-8 text-center">
                                     {PROFILE_DATA.bio}
                                 </p>
 
                                 {/* Social Links */}
-                                <div className="flex justify-center gap-4 mb-8\">
+                                <div className="flex justify-center gap-4 mb-8">
                                     {PROFILE_DATA.socialLinks.map((link) => {
                                         const Icon = link.icon;
                                         return (
@@ -391,16 +418,16 @@ export default function HomePage() {
                                                 rel="noopener noreferrer"
                                                 whileHover={{ scale: 1.1, y: -2 }}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-medium-gray hover:text-accent-orange hover:border-accent-orange transition-colors duration-300\">
-                                                <Icon className="w-5 h-5\" />
+                                                className="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-medium-gray hover:text-accent-orange hover:border-accent-orange transition-colors duration-300">
+                                                <Icon className="w-5 h-5" />
                                             </motion.a>
                                         );
                                     })}
                                 </div>
 
                                 {/* Contact Button */}
-                                <a href={`mailto:${PROFILE_DATA.email}`} className="w-full\">
-                                    <button className="w-full py-3 bg-accent-orange text-black font-heading font-bold uppercase tracking-wider rounded hover:bg-accent-orange-soft transition-colors duration-300\">
+                                <a href={`mailto:${PROFILE_DATA.email}`} className="w-full">
+                                    <button className="w-full py-3 bg-accent-orange text-black font-heading font-bold uppercase tracking-wider rounded hover:bg-accent-orange-soft transition-colors duration-300">
                                         Get In Touch
                                     </button>
                                 </a>
@@ -409,15 +436,15 @@ export default function HomePage() {
                     </div>
 
                     {/* About & Details - Right */}
-                    <div className="lg:col-span-2 flex flex-col gap-12\">
+                    <div className="lg:col-span-2 flex flex-col gap-12">
                         {/* About Section */}
                         <AnimatedElement>
                             <div>
-                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase\">
+                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase">
                                     About Me
                                 </h3>
-                                <div className="w-16 h-1 bg-accent-orange mb-6\" />
-                                <p className="font-paragraph text-light-gray/80 text-lg leading-relaxed\">
+                                <div className="w-16 h-1 bg-accent-orange mb-6" />
+                                <p className="font-paragraph text-light-gray/80 text-lg leading-relaxed">
                                     {PROFILE_DATA.about}
                                 </p>
                             </div>
@@ -426,25 +453,25 @@ export default function HomePage() {
                         {/* Education Section */}
                         <AnimatedElement delay={100}>
                             <div>
-                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase\">
+                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase">
                                     Education
                                 </h3>
-                                <div className="w-16 h-1 bg-accent-orange mb-6\" />
-                                <div className="space-y-6\">
+                                <div className="w-16 h-1 bg-accent-orange mb-6" />
+                                <div className="space-y-6">
                                     {PROFILE_DATA.education.map((edu, index) => (
                                         <motion.div
                                             key={index}
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             transition={{ delay: index * 0.1 }}
-                                            className="border-l-2 border-accent-orange pl-6\">
-                                            <p className="font-heading font-bold text-white text-lg mb-1\">
+                                            className="border-l-2 border-accent-orange pl-6">
+                                            <p className="font-heading font-bold text-white text-lg mb-1">
                                                 {edu.field}
                                             </p>
-                                            <p className="font-paragraph text-medium-gray text-sm mb-1\">
+                                            <p className="font-paragraph text-medium-gray text-sm mb-1">
                                                 {edu.institution}
                                             </p>
-                                            <p className="font-paragraph text-accent-orange text-xs\">
+                                            <p className="font-paragraph text-accent-orange text-xs">
                                                 {edu.year}
                                             </p>
                                         </motion.div>
@@ -453,49 +480,118 @@ export default function HomePage() {
                             </div>
                         </AnimatedElement>
 
-                        {/* Quick Stats */}
+                        {/* Quick Stats - Dynamic from CMS */}
                         <AnimatedElement delay={200}>
                             <div>
-                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase\">
+                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase">
                                     Quick Facts
                                 </h3>
-                                <div className="w-16 h-1 bg-accent-orange mb-6\" />
-                                <div className="grid grid-cols-2 gap-6\">
-                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
-                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
-                                            1+
+                                <div className="w-16 h-1 bg-accent-orange mb-6" />
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2">
+                                            {STATS_DATA[0].label}
                                         </p>
-                                        <p className="font-paragraph text-light-gray/80 text-sm\">
-                                            Years of Experience
-                                        </p>
-                                    </div>
-                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
-                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
-                                            14+
-                                        </p>
-                                        <p className="font-paragraph text-light-gray/80 text-sm\">
-                                            Projects Completed
+                                        <p className="font-paragraph text-light-gray/80 text-sm">
+                                            {STATS_DATA[0].desc}
                                         </p>
                                     </div>
-                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
-                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
-                                            20+
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2">
+                                            {STATS_DATA[1].label}
                                         </p>
-                                        <p className="font-paragraph text-light-gray/80 text-sm\">
-                                            Technologies
+                                        <p className="font-paragraph text-light-gray/80 text-sm">
+                                            {STATS_DATA[1].desc}
                                         </p>
                                     </div>
-                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
-                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
-                                            100%
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2">
+                                            {STATS_DATA[2].label}
                                         </p>
-                                        <p className="font-paragraph text-light-gray/80 text-sm\">
-                                            Client Satisfaction
+                                        <p className="font-paragraph text-light-gray/80 text-sm">
+                                            {STATS_DATA[2].desc}
+                                        </p>
+                                    </div>
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2">
+                                            {STATS_DATA[3].label}
+                                        </p>
+                                        <p className="font-paragraph text-light-gray/80 text-sm">
+                                            {STATS_DATA[3].desc}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </AnimatedElement>
+
+                        {/* Skills Summary */}
+                        {!isLoadingData && skills.length > 0 && (
+                            <AnimatedElement delay={300}>
+                                <div>
+                                    <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase">
+                                        Top Skills
+                                    </h3>
+                                    <div className="w-16 h-1 bg-accent-orange mb-6" />
+                                    <div className="flex flex-wrap gap-3">
+                                        {skills.slice(0, 6).map((skill) => (
+                                            <motion.span
+                                                key={skill._id}
+                                                whileHover={{ scale: 1.05, y: -2 }}
+                                                className="px-4 py-2 bg-charcoal border border-accent-orange/50 text-accent-orange font-heading text-sm uppercase tracking-wider rounded hover:border-accent-orange hover:bg-accent-orange/10 transition-colors duration-300">
+                                                {skill.skillName}
+                                            </motion.span>
+                                        ))}
+                                    </div>
+                                    <Link to="/skills" className="inline-block mt-6">
+                                        <motion.span
+                                            whileHover={{ x: 5 }}
+                                            className="font-heading text-accent-orange text-sm uppercase tracking-wider flex items-center gap-2">
+                                            View All Skills
+                                            <ArrowRight className="w-4 h-4" />
+                                        </motion.span>
+                                    </Link>
+                                </div>
+                            </AnimatedElement>
+                        )}
+
+                        {/* Certifications Summary */}
+                        {!isLoadingData && certificates.length > 0 && (
+                            <AnimatedElement delay={400}>
+                                <div>
+                                    <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase">
+                                        Certifications
+                                    </h3>
+                                    <div className="w-16 h-1 bg-accent-orange mb-6" />
+                                    <div className="space-y-3">
+                                        {certificates.slice(0, 3).map((cert) => (
+                                            <motion.div
+                                                key={cert._id}
+                                                initial={{ opacity: 0, x: -10 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                className="flex items-start gap-3 p-3 bg-charcoal/50 border border-white/10 rounded hover:border-accent-orange/50 transition-colors duration-300">
+                                                <div className="w-2 h-2 rounded-full bg-accent-orange mt-2 flex-shrink-0" />
+                                                <div className="flex-1">
+                                                    <p className="font-heading font-bold text-white text-sm uppercase">
+                                                        {cert.title}
+                                                    </p>
+                                                    <p className="font-paragraph text-medium-gray text-xs">
+                                                        {cert.issuingOrganization}
+                                                    </p>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                    <Link to="/certificates" className="inline-block mt-6">
+                                        <motion.span
+                                            whileHover={{ x: 5 }}
+                                            className="font-heading text-accent-orange text-sm uppercase tracking-wider flex items-center gap-2">
+                                            View All Certifications
+                                            <ArrowRight className="w-4 h-4" />
+                                        </motion.span>
+                                    </Link>
+                                </div>
+                            </AnimatedElement>
+                        )}
                     </div>
                 </div>
             </div>
