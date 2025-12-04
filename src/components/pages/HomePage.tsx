@@ -41,25 +41,25 @@ const EXPERTISE_DATA: ExpertiseItem[] = [
     icon: Code2, 
     title: 'Frontend Development', 
     desc: 'Crafting responsive, accessible interfaces with React, TypeScript, and modern CSS frameworks.',
-    tags: ['React', 'TypeScript', 'Tailwind', 'Framer Motion']
+    tags: ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'Figma', 'Tailwind']
+  },
+  { 
+    icon: Zap, 
+    title: 'Backend Devlopment', 
+    desc: 'Building complete applications with MERN stack, database design, and API development.',
+    tags: ['Node.js', 'Basic Express.js', 'MongoDB Atlas', 'REST APIs', 'Basic SQL']
+  },
+  { 
+    icon: Zap, 
+    title: 'Databases', 
+    desc: 'Designing and maintaining structured and unstructured databases for web applications.',
+    tags: ['MongoDB Atlas', 'SQL']
   },
   { 
     icon: Zap, 
     title: 'Full-Stack Solutions', 
     desc: 'Building complete applications with MERN stack, database design, and API development.',
     tags: ['Node.js', 'PostgreSQL', 'REST APIs', 'GraphQL']
-  },
-  { 
-    icon: Zap, 
-    title: 'Full-Stack Solutions', 
-    desc: 'Building complete applications with MERN stack, database design, and API development.',
-    tags: ['Node.js', 'PostgreSQL', 'REST APIs', 'GraphQL']
-  },
-  { 
-    icon: Palette, 
-    title: 'AI Integration', 
-    desc: 'Implementing intelligent features and machine learning capabilities into web applications.',
-    tags: ['OpenAI API', 'TensorFlow.js', 'Predictive UI', 'Automation']
   }
 ];
 
