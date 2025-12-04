@@ -277,10 +277,10 @@ export default function HomePage() {
                             //     The
                             // </span>
                             // <span className="font-heading font-black text-[12vw] md:text-[11vw] text-white tracking-tighter uppercase">
-                                 Vaibhava
+                            //     Vaibhava
                             </span>
                             <span className="font-heading font-black text-[12vw] md:text-[11vw] text-accent-orange tracking-tighter uppercase md:-mt-4">
-                                Raju 
+                            //    Raju 
                             </span> //
                         </h1>
                     </AnimatedElement>
