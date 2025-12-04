@@ -374,23 +374,24 @@ export default function HomePage() {
                     
                     {/* Sticky Title */}
                     <div className="lg:col-span-4 relative">
-                        <div className="sticky top-32">
-                            <AnimatedElement>
-                                <h2 className="font-heading font-black text-5xl md:text-7xl text-white uppercase leading-none mb-8">
-                                    Full<span className="text-accent-orange">Stack</span><br/>
-                                    Vision
-                                </h2>
-                            </AnimatedElement>
-                            <AnimatedElement delay={200}>
-                                <div className="w-24 h-2 bg-accent-orange mb-8" />
-                            </AnimatedElement>
-                            <AnimatedElement delay={300}>
-                                <p className="font-paragraph text-lg text-light-gray/80 italic leading-relaxed max-w-md">
-                                    "I don't just write code; I architect digital ecosystems that breathe, react, and evolve."
-                                </p>
-                            </AnimatedElement>
-                        </div>
-                    </div>
+    <div className="lg:sticky lg:top-32">
+        <AnimatedElement>
+            <h2 className="font-heading font-black text-4xl sm:text-5xl md:text-7xl text-white uppercase leading-none mb-6 sm:mb-8">
+                Full<span className="text-accent-orange">Stack</span><br/>
+                Vision
+            </h2>
+        </AnimatedElement>
+        <AnimatedElement delay={200}>
+            <div className="w-20 sm:w-24 h-2 bg-accent-orange mb-6 sm:mb-8" />
+        </AnimatedElement>
+        <AnimatedElement delay={300}>
+            <p className="font-paragraph text-base sm:text-lg text-light-gray/80 italic leading-relaxed max-w-md mt-4">
+                "I don't just write code; I architect digital ecosystems that breathe, react, and evolve."
+            </p>
+        </AnimatedElement>
+    </div>
+</div>
+
 
                     {/* Scrolling Content */}
                     <div className="lg:col-span-8 flex flex-col gap-20">
