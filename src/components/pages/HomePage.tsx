@@ -7,7 +7,8 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Skills, Certificates } from '@/entities';
-import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Cpu, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+
 
 // --- Types & Interfaces ---
 interface StatItem {
@@ -44,13 +45,13 @@ const EXPERTISE_DATA: ExpertiseItem[] = [
     tags: ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'Figma', 'Tailwind']
   },
   { 
-    icon: Zap, 
+    icon: Cpu, 
     title: 'Backend Devlopment', 
     desc: 'Building complete applications with MERN stack, database design, and API development.',
     tags: ['Node.js', 'Basic Express.js', 'MongoDB Atlas', 'REST APIs', 'Basic SQL']
   },
   { 
-    icon: Zap, 
+    icon: Layers, 
     title: 'Databases', 
     desc: 'Designing and maintaining structured and unstructured databases for web applications.',
     tags: ['MongoDB Atlas', 'SQL']
