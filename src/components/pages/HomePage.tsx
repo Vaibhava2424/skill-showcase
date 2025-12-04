@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Skills, Certificates } from '@/entities';
-import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Instagram, Mail } from 'lucide-react';
 
 // --- Types & Interfaces ---
 interface StatItem {
@@ -65,21 +65,21 @@ const EXPERTISE_DATA: ExpertiseItem[] = [
 
 // Profile Data
 const PROFILE_DATA = {
-  name: 'Karim Chehab',
+  name: 'Vaibhava Raju Nadakuditi',
   role: 'Creative Full-Stack Developer',
-  bio: 'I craft digital experiences that blend technical excellence with artistic vision. Specializing in building high-performance web applications with React, I transform complex ideas into elegant, user-centric solutions.',
-  location: 'Digital Realm',
-  email: 'hello@karimchehab.com',
+  bio: ' I am a versatile full-stack developer with expertise in Python, JavaScript, TypeScript, React.js, Next.js, and Linux. I have built projects like Tasty Kitchen (full stack with APIs), Jobby App (frontend), Tourism Website (HTML, Bootstrap), Food Munch (HTML, CSS), TechTrends India (React.js), Law Guide (team project with legal APIs), and SubTrack (UI/UX for subscription tracking). Skilled in API integration, responsive design, and cloud hosting, I focus on delivering scalable, user-friendly, and innovative digital products.',
+  location: 'Hyderabad',
+  email: 'vaibhava2424@gmail.com',
   about: 'With over 1 year of experience in web development, I\'ve worked on diverse projects ranging from e-commerce platforms to interactive digital experiences. My approach combines clean code architecture with modern design principles to create applications that not only function flawlessly but also delight users.',
   education: [
-    { institution: 'Self-Taught Developer', field: 'Full-Stack Web Development', year: '2024' },
-    { institution: 'Online Courses', field: 'React & Modern JavaScript', year: '2023' }
+    { institution: 'NxtWave CCBP 4.0 – NIAT Program', field: 'Software Development', year: '2024' },
+    { institution: 'BITS Hyderabad', field: 'B.Sc Computer Science', year: '2024' }
   ],
   socialLinks: [
-    { name: 'GitHub', url: 'https://github.com', icon: Github },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: Linkedin },
-    { name: 'Twitter', url: 'https://twitter.com', icon: Twitter },
-    { name: 'Email', url: 'mailto:hello@karimchehab.com', icon: Mail }
+    { name: 'GitHub', url: 'https://github.com/Vaibhava2424', icon: Github },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/vaibhava-raju-nadakuditi/', icon: Linkedin },
+    { name: 'Instagram', url: 'https://www.instagram.com/vaibhava.raj/', icon: Instagram },
+    { name: 'Email', url: 'mailto:vaibhava2424@gmail.com', icon: Mail }
   ] as SocialLink[]
 };
 
