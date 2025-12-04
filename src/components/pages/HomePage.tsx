@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'fra
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 // --- Types & Interfaces ---
 interface StatItem {
@@ -18,6 +18,12 @@ interface ExpertiseItem {
   title: string;
   desc: string;
   tags: string[];
+}
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: React.ElementType;
 }
 
 // --- Canonical Data Sources ---
@@ -54,6 +60,26 @@ const EXPERTISE_DATA: ExpertiseItem[] = [
     tags: ['OpenAI API', 'TensorFlow.js', 'Predictive UI', 'Automation']
   }
 ];
+
+// Profile Data
+const PROFILE_DATA = {
+  name: 'Karim Chehab',
+  role: 'Creative Full-Stack Developer',
+  bio: 'I craft digital experiences that blend technical excellence with artistic vision. Specializing in building high-performance web applications with React, I transform complex ideas into elegant, user-centric solutions.',
+  location: 'Digital Realm',
+  email: 'hello@karimchehab.com',
+  about: 'With over 1 year of experience in web development, I\'ve worked on diverse projects ranging from e-commerce platforms to interactive digital experiences. My approach combines clean code architecture with modern design principles to create applications that not only function flawlessly but also delight users.',
+  education: [
+    { institution: 'Self-Taught Developer', field: 'Full-Stack Web Development', year: '2024' },
+    { institution: 'Online Courses', field: 'React & Modern JavaScript', year: '2023' }
+  ],
+  socialLinks: [
+    { name: 'GitHub', url: 'https://github.com', icon: Github },
+    { name: 'LinkedIn', url: 'https://linkedin.com', icon: Linkedin },
+    { name: 'Twitter', url: 'https://twitter.com', icon: Twitter },
+    { name: 'Email', url: 'mailto:hello@karimchehab.com', icon: Mail }
+  ] as SocialLink[]
+};
 
 // --- Utility Components ---
 
@@ -305,6 +331,172 @@ export default function HomePage() {
                             Working Worldwide.
                         </p>
                     </AnimatedElement>
+                </div>
+            </div>
+        </section>
+
+        {/* --- PROFILE SECTION --- */}
+        <section className="w-full bg-black py-24 md:py-32 relative overflow-hidden border-t border-white/10\">
+            <div className="max-w-[110rem] mx-auto px-4 md:px-8\">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16\">
+                    {/* Profile Card - Left */}
+                    <div className="lg:col-span-1\">
+                        <AnimatedElement>
+                            <div className="sticky top-32 bg-charcoal border border-white/10 p-8 md:p-10 rounded-lg hover:border-accent-orange/50 transition-colors duration-500\">
+                                {/* Profile Avatar */}
+                                <div className="mb-8 flex justify-center\">
+                                    <motion.div
+                                        animate={{
+                                            boxShadow: [
+                                                "0 0 20px rgba(255, 106, 0, 0.3)",
+                                                "0 0 40px rgba(255, 106, 0, 0.5)",
+                                                "0 0 20px rgba(255, 106, 0, 0.3)"
+                                            ]
+                                        }}
+                                        transition={{ duration: 3, repeat: Infinity }}
+                                        className="w-32 h-32 rounded-full bg-gradient-to-br from-accent-orange to-accent-orange-soft flex items-center justify-center\">
+                                        <div className="w-28 h-28 rounded-full bg-black flex items-center justify-center\">
+                                            <Code2 className="w-14 h-14 text-accent-orange\" />
+                                        </div>
+                                    </motion.div>
+                                </div>
+
+                                {/* Name & Role */}
+                                <div className="text-center mb-6\">
+                                    <h3 className="font-heading font-black text-2xl md:text-3xl text-white mb-2 uppercase\">
+                                        {PROFILE_DATA.name}
+                                    </h3>
+                                    <p className="font-paragraph text-accent-orange text-sm md:text-base italic mb-2\">
+                                        {PROFILE_DATA.role}
+                                    </p>
+                                    <p className="font-paragraph text-medium-gray text-xs md:text-sm\">
+                                        📍 {PROFILE_DATA.location}
+                                    </p>
+                                </div>
+
+                                {/* Bio */}
+                                <p className="font-paragraph text-light-gray/80 text-sm leading-relaxed mb-8 text-center\">
+                                    {PROFILE_DATA.bio}
+                                </p>
+
+                                {/* Social Links */}
+                                <div className="flex justify-center gap-4 mb-8\">
+                                    {PROFILE_DATA.socialLinks.map((link) => {
+                                        const Icon = link.icon;
+                                        return (
+                                            <motion.a
+                                                key={link.name}
+                                                href={link.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                whileHover={{ scale: 1.1, y: -2 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className="w-10 h-10 rounded-full bg-black border border-white/20 flex items-center justify-center text-medium-gray hover:text-accent-orange hover:border-accent-orange transition-colors duration-300\">
+                                                <Icon className="w-5 h-5\" />
+                                            </motion.a>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* Contact Button */}
+                                <a href={`mailto:${PROFILE_DATA.email}`} className="w-full\">
+                                    <button className="w-full py-3 bg-accent-orange text-black font-heading font-bold uppercase tracking-wider rounded hover:bg-accent-orange-soft transition-colors duration-300\">
+                                        Get In Touch
+                                    </button>
+                                </a>
+                            </div>
+                        </AnimatedElement>
+                    </div>
+
+                    {/* About & Details - Right */}
+                    <div className="lg:col-span-2 flex flex-col gap-12\">
+                        {/* About Section */}
+                        <AnimatedElement>
+                            <div>
+                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase\">
+                                    About Me
+                                </h3>
+                                <div className="w-16 h-1 bg-accent-orange mb-6\" />
+                                <p className="font-paragraph text-light-gray/80 text-lg leading-relaxed\">
+                                    {PROFILE_DATA.about}
+                                </p>
+                            </div>
+                        </AnimatedElement>
+
+                        {/* Education Section */}
+                        <AnimatedElement delay={100}>
+                            <div>
+                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase\">
+                                    Education
+                                </h3>
+                                <div className="w-16 h-1 bg-accent-orange mb-6\" />
+                                <div className="space-y-6\">
+                                    {PROFILE_DATA.education.map((edu, index) => (
+                                        <motion.div
+                                            key={index}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: index * 0.1 }}
+                                            className="border-l-2 border-accent-orange pl-6\">
+                                            <p className="font-heading font-bold text-white text-lg mb-1\">
+                                                {edu.field}
+                                            </p>
+                                            <p className="font-paragraph text-medium-gray text-sm mb-1\">
+                                                {edu.institution}
+                                            </p>
+                                            <p className="font-paragraph text-accent-orange text-xs\">
+                                                {edu.year}
+                                            </p>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        </AnimatedElement>
+
+                        {/* Quick Stats */}
+                        <AnimatedElement delay={200}>
+                            <div>
+                                <h3 className="font-heading font-black text-3xl md:text-4xl text-white mb-6 uppercase\">
+                                    Quick Facts
+                                </h3>
+                                <div className="w-16 h-1 bg-accent-orange mb-6\" />
+                                <div className="grid grid-cols-2 gap-6\">
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
+                                            1+
+                                        </p>
+                                        <p className="font-paragraph text-light-gray/80 text-sm\">
+                                            Years of Experience
+                                        </p>
+                                    </div>
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
+                                            14+
+                                        </p>
+                                        <p className="font-paragraph text-light-gray/80 text-sm\">
+                                            Projects Completed
+                                        </p>
+                                    </div>
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
+                                            20+
+                                        </p>
+                                        <p className="font-paragraph text-light-gray/80 text-sm\">
+                                            Technologies
+                                        </p>
+                                    </div>
+                                    <div className="bg-charcoal border border-white/10 p-6 rounded hover:border-accent-orange/50 transition-colors duration-300\">
+                                        <p className="font-heading font-black text-3xl text-accent-orange mb-2\">
+                                            100%
+                                        </p>
+                                        <p className="font-paragraph text-light-gray/80 text-sm\">
+                                            Client Satisfaction
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </AnimatedElement>
+                    </div>
                 </div>
             </div>
         </section>
