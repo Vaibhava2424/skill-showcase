@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Skills, Certificates } from '@/entities';
-import { ArrowRight, Code2, Zap, Cpu, Palette, ArrowDownRight, Globe, Layers, Cpu, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Github, Linkedin, Twitter, Mail, Cpu, Instagram } from 'lucide-react';
 
 
 // --- Types & Interfaces ---
