@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'fra
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu } from 'lucide-react';
+import { ArrowRight, Code2, Zap, Palette, ArrowDownRight, Globe, Layers, Cpu, User } from 'lucide-react';
 
 // --- Types & Interfaces ---
 interface StatItem {
@@ -232,20 +232,105 @@ export default function HomePage() {
                         </h1>
                     </AnimatedElement>
 
-                    {/* Central Image - The "Motif" from inspiration */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none mix-blend-normal">
+                    {/* Central Abstract Profile Icon with Enhanced Animations */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
                         <motion.div 
-                            initial={{ opacity: 0, scale: 0.8 }}
+                            initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
-                            className="w-full h-full"
+                            className="relative"
                         >
-                            <ParallaxImage 
-                                src="https://static.wixstatic.com/media/98427a_902ff53709a04d9faf6b946ecd604282~mv2.png?originWidth=448&originHeight=576"
-                                alt="Abstract creative portrait"
-                                className="w-full h-full object-cover shadow-2xl shadow-accent-orange/20"
-                                speed={0.2}
+                            {/* Outer rotating ring */}
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                className="absolute inset-0 w-[280px] md:w-[400px] lg:w-[500px] h-[280px] md:h-[400px] lg:h-[500px] border-2 border-accent-orange/30 rounded-full"
                             />
+                            
+                            {/* Middle pulsing ring */}
+                            <motion.div
+                                animate={{ 
+                                    scale: [1, 1.1, 1],
+                                    opacity: [0.5, 0.8, 0.5]
+                                }}
+                                transition={{ duration: 4, repeat: Infinity }}
+                                className="absolute inset-0 w-[280px] md:w-[400px] lg:w-[500px] h-[280px] md:h-[400px] lg:h-[500px] border border-accent-orange-soft/40 rounded-full"
+                            />
+                            
+                            {/* Inner rotating ring (opposite direction) */}
+                            <motion.div
+                                animate={{ rotate: -360 }}
+                                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                                className="absolute inset-0 w-[280px] md:w-[400px] lg:w-[500px] h-[280px] md:h-[400px] lg:h-[500px] border-2 border-dashed border-accent-orange/20 rounded-full"
+                            />
+                            
+                            {/* Central icon container */}
+                            <div className="absolute inset-0 flex items-center justify-center w-[280px] md:w-[400px] lg:w-[500px] h-[280px] md:h-[400px] lg:h-[500px]">
+                                <motion.div
+                                    animate={{ 
+                                        y: [0, -15, 0],
+                                        scale: [1, 1.05, 1]
+                                    }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                                    className="relative"
+                                >
+                                    {/* Glow effect */}
+                                    <motion.div
+                                        animate={{ 
+                                            opacity: [0.3, 0.6, 0.3],
+                                            scale: [1, 1.2, 1]
+                                        }}
+                                        transition={{ duration: 3, repeat: Infinity }}
+                                        className="absolute inset-0 w-32 h-32 md:w-48 md:h-48 bg-accent-orange/20 rounded-full blur-3xl"
+                                    />
+                                    
+                                    {/* Icon background circle */}
+                                    <motion.div
+                                        animate={{ 
+                                            boxShadow: [
+                                                "0 0 20px rgba(255, 106, 0, 0.3)",
+                                                "0 0 40px rgba(255, 106, 0, 0.6)",
+                                                "0 0 20px rgba(255, 106, 0, 0.3)"
+                                            ]
+                                        }}
+                                        transition={{ duration: 2.5, repeat: Infinity }}
+                                        className="relative w-32 h-32 md:w-48 md:h-48 bg-gradient-to-br from-accent-orange/10 to-accent-orange-soft/5 border border-accent-orange/40 rounded-full flex items-center justify-center"
+                                    >
+                                        {/* Abstract user icon */}
+                                        <motion.div
+                                            animate={{ 
+                                                rotate: [0, 5, -5, 0]
+                                            }}
+                                            transition={{ duration: 4, repeat: Infinity }}
+                                        >
+                                            <User className="w-16 h-16 md:w-24 md:h-24 text-accent-orange" strokeWidth={1.5} />
+                                        </motion.div>
+                                    </motion.div>
+                                </motion.div>
+                            </div>
+                            
+                            {/* Floating particles */}
+                            {[...Array(4)].map((_, i) => (
+                                <motion.div
+                                    key={i}
+                                    animate={{
+                                        x: [0, Math.cos((i * Math.PI) / 2) * 60, 0],
+                                        y: [0, Math.sin((i * Math.PI) / 2) * 60, 0],
+                                        opacity: [0, 1, 0]
+                                    }}
+                                    transition={{
+                                        duration: 3,
+                                        repeat: Infinity,
+                                        delay: i * 0.75
+                                    }}
+                                    className="absolute w-2 h-2 bg-accent-orange rounded-full"
+                                    style={{
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)"
+                                    }}
+                                />
+                            ))}
                         </motion.div>
                     </div>
                 </div>
