@@ -70,10 +70,10 @@ export default function PortfolioPage() {
           className="text-center mb-16"
         >
           <h1 className="font-heading uppercase text-7xl md:text-8xl text-white tracking-wider font-black mb-6">
-            <span className="text-accent-orange">Selected</span> PROJECTS
+            MY <span className="text-accent-orange">WORK</span>
           </h1>
           <p className="font-paragraph italic text-xl text-light-gray max-w-3xl mx-auto">
-            A curated collection of digital experiences, innovative solutions, and creative explorations
+            A comprehensive showcase of all my projects, innovations, and creative endeavors across diverse technologies and domains
           </p>
         </motion.div>
 
