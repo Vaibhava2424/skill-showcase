@@ -15,10 +15,7 @@ const filterVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.05,
-      duration: 0.3,
-    },
+    transition: { delay: i * 0.05, duration: 0.3 }
   }),
   exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
 };
@@ -28,10 +25,7 @@ const cardVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.05,
-      duration: 0.4,
-    },
+    transition: { delay: i * 0.05, duration: 0.4 }
   }),
   exit: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
@@ -50,8 +44,9 @@ export default function PortfolioPage() {
     if (activeFilter === 'All') {
       setFilteredProjects(projects);
     } else {
-      const filtered = projects.filter(project => 
-        project.category?.toLowerCase() === activeFilter.toLowerCase()
+      const filtered = projects.filter(
+        (project) =>
+          project.category?.toLowerCase() === activeFilter.toLowerCase()
       );
       setFilteredProjects(filtered);
     }
@@ -60,7 +55,7 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-black">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="w-full max-w-[120rem] mx-auto px-8 py-24">
         <motion.div
@@ -77,7 +72,7 @@ export default function PortfolioPage() {
           </p>
         </motion.div>
 
-        {/* Filter Buttons - Stylish Animation */}
+        {/* Filter Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -134,7 +129,7 @@ export default function PortfolioPage() {
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <motion.div
-                  key={project._id}
+                  key={project.id}
                   custom={index}
                   variants={cardVariants}
                   initial="hidden"
@@ -143,29 +138,22 @@ export default function PortfolioPage() {
                   layout
                 >
                   <Link
-                    to={`/portfolio/${project._id}`}
+                    to={`/portfolio/${project.id}`}
                     className="group block h-full"
                   >
                     <div className="relative overflow-hidden mb-4 aspect-[4/3] bg-charcoal">
-                      {project.thumbnail && (
+                      {project.image && (
                         <Image
-                          src={project.thumbnail}
-                          alt={project.title || 'Project thumbnail'}
+                          src={project.image}
+                          alt={project.title || 'Project image'}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           width={600}
                         />
                       )}
-                      <motion.div
-                        className="absolute inset-0 bg-accent-orange opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 0.2 }}
-                      />
-                      
-                      {/* Hover overlay with category */}
+
+                      {/* Hover overlay */}
                       <motion.div
                         className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
                       >
                         <motion.div
                           initial={{ scale: 0.8, opacity: 0 }}
@@ -180,12 +168,13 @@ export default function PortfolioPage() {
                         </motion.div>
                       </motion.div>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <div className="flex items-start justify-between gap-4">
                         <h3 className="font-heading uppercase text-xl text-white tracking-wider group-hover:text-accent-orange transition-colors">
                           {project.title}
                         </h3>
+
                         {project.category && (
                           <motion.span
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -196,16 +185,16 @@ export default function PortfolioPage() {
                           </motion.span>
                         )}
                       </div>
-                      
+
                       {project.description && (
                         <p className="font-paragraph italic text-base text-light-gray line-clamp-2">
                           {project.description}
                         </p>
                       )}
-                      
-                      {project.technologies && (
+
+                      {project.techStack && (
                         <p className="font-heading uppercase text-xs text-medium-gray tracking-wider opacity-70">
-                          {project.technologies}
+                          {project.techStack.join(', ')}
                         </p>
                       )}
                     </div>
