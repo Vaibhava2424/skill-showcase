@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { BaseCrudService } from '@/integrations';
 import { Projects } from '@/entities';
-import { ExternalLink, X } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { projectsList } from '@/data/projectsList';
 
 const categories = ['All', 'MERN', 'Responsive', 'AI', 'Other', 'Frontend'];
 
@@ -40,10 +40,10 @@ export default function PortfolioPage() {
   const [projects, setProjects] = useState<Projects[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Projects[]>([]);
   const [activeFilter, setActiveFilter] = useState('All');
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    loadProjects();
+    setProjects(projectsList);
+    setFilteredProjects(projectsList);
   }, []);
 
   useEffect(() => {
@@ -56,14 +56,6 @@ export default function PortfolioPage() {
       setFilteredProjects(filtered);
     }
   }, [activeFilter, projects]);
-
-  const loadProjects = async () => {
-    setIsLoading(true);
-    const { items } = await BaseCrudService.getAll<Projects>('projects');
-    setProjects(items);
-    setFilteredProjects(items);
-    setIsLoading(false);
-  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -121,17 +113,7 @@ export default function PortfolioPage() {
         </motion.div>
 
         {/* Projects Grid */}
-        {isLoading ? (
-          <div className="text-center py-24">
-            <motion.p
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="font-heading uppercase text-xl text-accent-orange tracking-wider"
-            >
-              Loading projects...
-            </motion.p>
-          </div>
-        ) : filteredProjects.length === 0 ? (
+        {filteredProjects.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
