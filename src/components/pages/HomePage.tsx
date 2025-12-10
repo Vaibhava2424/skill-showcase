@@ -280,7 +280,7 @@ export default function HomePage() {
                             <span className="font-heading font-black text-[12vw] md:text-[11vw] text-white tracking-tighter uppercase">
                                 Vaibhava
                             </span>
-                            <span className="font-heading font-black text-[12vw] md:text-[11vw] text-accent-orange tracking-tighter uppercase md:-mt-4">
+                            <span className="font-heading font-black text-[12vw] md:text-[11vw] text-accent-orange tracking-tighter uppercase md:-mt-4 ml-4">
                                 Raju 
                             </span> 
                         </h1>
