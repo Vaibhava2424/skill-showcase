@@ -273,7 +273,7 @@ export default function HomePage() {
                 {/* Main Typography Composition */}
                 <div className="relative w-full text-center">
                     <AnimatedElement className="relative z-20 mix-blend-difference">
-                        <h1 className="flex flex-col items-center  leading-[0.85]">
+                        <h1 className="flex flex-col items-center justify-center leading-[0.85]">
                              <span className="font-paragraph italic text-5xl md:text-7xl lg:text-9xl text-accent-orange self-start md:self-center md:-ml-[30%] mb-2 md:mb-4">
                             //     Nadakuditi
                             // </span>
