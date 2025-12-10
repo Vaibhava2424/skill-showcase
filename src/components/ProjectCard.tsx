@@ -88,28 +88,31 @@ export default function ProjectCard({
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           )}
-          {githubUrl?.frontend && (
-            <a
-              href={githubUrl.frontend}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange text-accent-orange font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange hover:text-black transition-colors duration-300"
-            >
-              <Github className="w-4 h-4" />
-              Frontend
-            </a>
-          )}
-          {githubUrl?.backend && (
-            <a
-              href={githubUrl.backend}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange text-accent-orange font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange hover:text-black transition-colors duration-300"
-            >
-              <Github className="w-4 h-4" />
-              Backend
-            </a>
-          )}
+          {/* GitHub Buttons */}
+{githubUrl?.frontend && (
+  <a
+    href={githubUrl.frontend}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange text-accent-orange font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange hover:text-black transition-colors duration-300"
+  >
+    <Github className="w-4 h-4" />
+    Frontend
+  </a>
+)}
+
+{githubUrl?.backend && (
+  <a
+    href={githubUrl.backend}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange text-accent-orange font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange hover:text-black transition-colors duration-300"
+  >
+    <Github className="w-4 h-4" />
+    Backend
+  </a>
+)}
+
           {liveUrl && (
             <a
               href={liveUrl}
