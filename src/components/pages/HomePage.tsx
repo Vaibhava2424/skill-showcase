@@ -277,7 +277,7 @@ export default function HomePage() {
                              <span className="font-paragraph italic text-5xl md:text-7xl lg:text-9xl text-accent-orange self-start md:self-center md:-ml-[30%] mb-2 md:mb-4">
                             //     Nadakuditi
                             // </span>
-                            <span className="font-heading underline font-black text-[12vw] md:text-[11vw] text-white tracking-tighter uppercase">
+                            <span className="font-heading font-black text-[12vw] md:text-[11vw] text-white tracking-tighter uppercase">
                                 Vaibhava
                             </span>
                             <span className="font-paragraph italic font-black text-[12vw] md:text-7xl lg:text-9xl text-accent-orange tracking-tighter md:-mt-4 ml-4 pt-4 pl-4">
