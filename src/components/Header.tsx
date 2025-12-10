@@ -17,7 +17,7 @@ export default function Header() {
             className="group relative"
           >
             <span className="font-heading uppercase text-2xl font-bold text-accent-orange tracking-wider">
-              KC
+              PW
             </span>
             <motion.div
               className="absolute bottom-0 left-0 h-0.5 bg-accent-orange"
