@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 import { ProjectCardProps } from '@/components/ProjectCard';
 
 // Static projects array
-const staticProjects: ProjectCardProps[] = [
+const staticProjects: ProjectCardProps[] =  [
   {
     id: 1,
     title: "Jobby App",
@@ -27,7 +27,175 @@ const staticProjects: ProjectCardProps[] = [
     tags: ["React", "Node.js", "JWT", "CSS"],
     category: "mern",
   },
-  // ... include all your other static projects here
+  {
+    id: 2,
+    title: "Law Guide",
+    description:
+      "A team project developed during a no-code hackathon to provide structured legal information on government schemes, IPC sections, and public legal resources. Built entirely using AI-powered tools, it offers an intuitive interface, real-time policy insights, and smooth navigation. I contributed to content structuring, UI/UX, and flow logic.",
+    liveUrl: "https://p-188620.lovable.app/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233302/Screenshot_2025-09-18_103807_y98rfm.png",
+    tags: ["Figma", "Relume", "Builder.io", "Lovable"],
+    category: "AI",
+  },
+  {
+    id: 3,
+    title: "SubTrack",
+    description:
+      "A UI/UX subscription-tracking project designed to simplify OTT management for users. It includes features like subscription reminders, trending content suggestions, discount coupons, and AI-powered enhancements. Designed in Figma for a seamless and visually clean user flow.",
+    liveUrl:
+      "https://www.figma.com/design/dzo7eVJZGCpfFZ3D04AD8q/Vaibhava_project",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233258/Screenshot_2025-11-04_104400_h9szgl.png",
+    tags: ["Figma", "UI/UX"],
+    category: "other",
+  },
+  {
+    id: 4,
+    title: "Nextjs Project",
+    description:
+      "A simple e-commerce front-end built with Next.js, featuring multi-page navigation, product listings, and a clean responsive UI. The platform includes pages for Home, About, Products, Cart, and Feedback, offering users a smooth browsing experience. Integrated with dynamic routing and modern layouts, it serves as a foundation for future e-commerce expansion.",
+    liveUrl: "https://next-js-project-eight-mu.vercel.app",
+    githubUrl: {
+      frontend: "https://github.com/Vaibhava2424/NextJs-Project",
+    },
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1763011639/Screenshot_2025-11-13_105705_jjxlvm.png",
+    tags: ["Nextjs", "Reactkjs", "Tailwind CSS"],
+    category: "frontend",
+  },
+  {
+    id: 5,
+    title: "AI Chatbot",
+    description:
+      "Developed a functional AI chatbot capable of interacting with users and answering queries in real-time. Built using BotPress tools, integrated NLP features, and tested through real-time chat previews. Focused on improving conversational design, automation, and AI workflows.",
+    liveUrl:
+      "https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/12/28/13/20241228132934-Q9SXG0M8.json",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233084/Screenshot_2025-11-04_104057_ffa9di.png",
+    tags: ["BotPress WorkSpace", "BotPress Studio", "BotPress Web Chat Preview"],
+    category: "AI",
+  },
+  {
+    id: 6,
+    title: "Food Munch",
+    description:
+      "A personal project where I developed a food-centric website to bring together food lovers and culinary enthusiasts. Built using HTML and CSS, it showcases recipes, food blogs, and trending dishes in a visually appealing and user-friendly layout.",
+    liveUrl: "https://foodmunch246.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232680/Screenshot_2025-11-04_103353_jw6iys.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "responsive",
+  },
+  {
+    id: 7,
+    title: "Tasty Kitchens",
+    description:
+      "Tasty Kitchens – Food ordering full-stack platform using React + Vite frontend and Node.js + MongoDB backend. Features restaurant listing, menus, authentication, and orders simulation.",
+    liveUrl: "https://tasty-kitchens-nu.vercel.app/",
+    githubUrl: {
+      frontend: "https://github.com/Vaibhava2424/Tasty-Kitchens",
+      backend: "https://github.com/Vaibhava2424/Tasty-Kitchen-apis",
+    },
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232980/Screenshot_2025-09-18_102156_p5c6pw.png",
+    tags: ["React", "Node.js", "Express", "MongoDB"],
+    category: "mern",
+  },
+  {
+    id: 8,
+    title: "BookFlow",
+    description:
+      "A full-stack book management application developed using React + TypeScript on frontend and Node.js with MongoDB backend. Implements secure JWT authentication and CRUD operations with a clean UI.",
+    liveUrl: "https://bookflow-eosin.vercel.app/",
+    githubUrl: {
+      frontend: "https://github.com/Vaibhava2424/bookFlow",
+      backend: "https://github.com/Vaibhava2424/BookFlow-apis",
+    },
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232946/Screenshot_2025-11-04_103823_iggpak.png",
+    tags: ["React", "TypeScript", "Node.js", "MongoDB"],
+    category: "mern",
+  },
+
+  // SMALL PROJECTS
+  {
+    id: 9,
+    title: "Multi-Consultancy Webpage",
+    description:
+      "A professional consultancy-style landing page featuring a responsive layout, service highlights, and structured content sections.",
+    liveUrl: "https://jefnncefjv.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233543/Screenshot_2025-11-04_104817_da4aag.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "responsive",
+  },
+  {
+    id: 10,
+    title: "Nature Tourism Page",
+    description:
+      "A nature-themed tourism landing page built with Bootstrap grids and mobile-first layout.",
+    liveUrl: "https://jwncwndcj.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233653/Screenshot_2025-11-04_104946_cu1bgt.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "responsive",
+  },
+  {
+    id: 11,
+    title: "Wikipedia Search Engine",
+    description:
+      "A real-time Wikipedia search application using Fetch API to pull search results with dynamic DOM rendering.",
+    liveUrl: "https://wikipedia64.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233760/Screenshot_2025-11-04_105222_aknvdo.png",
+    tags: ["HTML", "CSS", "JavaScript"],
+    category: "other",
+  },
+  {
+    id: 12,
+    title: "Number Guess Game",
+    description:
+      "A fun interactive guessing game built using JavaScript logic and DOM manipulation.",
+    liveUrl: "https://guessingame24.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233794/Screenshot_2025-11-04_105300_ytsjhi.png",
+    tags: ["HTML", "CSS", "JavaScript"],
+    category: "other",
+  },
+  {
+    id: 13,
+    title: "Wedding Celebration Page",
+    description:
+      "A vibrant and festive wedding theme page built with Bootstrap and custom UI blocks.",
+    liveUrl: "https://marriagefestive.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233973/Screenshot_2025-11-04_105600_paccxc.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "responsive",
+  },
+  {
+    id: 14,
+    title: "Tech Trends Showcase",
+    description:
+      "A technology-trends themed website created with Bootstrap and supported by AI-assisted design tools.",
+    liveUrl: "https://futurthink11.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762234092/Screenshot_2025-11-04_105722_sntunq.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "AI",
+  },
+  {
+    id: 15,
+    title: "FitPro Fitness Page",
+    description:
+      "A responsive fitness landing page showcasing workout services, trainers, and brand hero section.",
+    liveUrl: "https://fitprocom.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762234177/Screenshot_2025-11-04_105921_rx2krh.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "responsive",
+  },
 ];
 
 export default function ProjectDetailPage() {
