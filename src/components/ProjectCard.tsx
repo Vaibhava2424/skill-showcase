@@ -7,6 +7,7 @@ export interface ProjectCardProps {
   description: string;
   image: string;
   tags: string[];
+  category: string;
   githubUrl?: string;
   liveUrl?: string;
 }
