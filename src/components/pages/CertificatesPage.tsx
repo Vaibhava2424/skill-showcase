@@ -19,7 +19,6 @@ const certVariants = {
 const staticCertificates: Certificates[] = [
   {
     _id: '1',
-    id: 1,
     title: 'Ethical Hacking 101 Workshop',
     description: 'Comprehensive workshop covering ethical hacking principles, penetration testing methodologies, and security best practices.',
     liveUrl: 'https://example.com/ethical-hacking-101',
@@ -27,7 +26,6 @@ const staticCertificates: Certificates[] = [
   },
   {
     _id: '2',
-    id: 2,
     title: 'The MCP Magic Workshop',
     description: 'An introductory session exploring how MCP-style automation streamlines workflows and enhances digital efficiency. Designed to help participants understand intelligent control systems and their practical applications.',
     liveUrl: '',
@@ -35,7 +33,6 @@ const staticCertificates: Certificates[] = [
   },
   {
     _id: '3',
-    id: 3,
     title: 'Robotic Arm 101 Workshop',
     description: 'A foundational workshop introducing robotic arm mechanisms, motion control, and real-world automation. Helps participants understand how robotic arms operate and how they are programmed for precision tasks.',
     liveUrl: '',
