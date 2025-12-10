@@ -442,7 +442,7 @@ export default function ProjectDetailPage() {
                 Repository Links
               </h2>
               <div className="space-y-4">
-                {staticProj?.githubUrl?.frontend && (
+                {staticProj?.githubUrl && typeof staticProj.githubUrl === 'object' && staticProj.githubUrl.frontend && (
                   <motion.a
                     href={staticProj.githubUrl.frontend}
                     target="_blank"
@@ -465,7 +465,7 @@ export default function ProjectDetailPage() {
                   </motion.a>
                 )}
 
-                {staticProj?.githubUrl?.backend && (
+                {staticProj?.githubUrl && typeof staticProj.githubUrl === 'object' && staticProj.githubUrl.backend && (
                   <motion.a
                     href={staticProj.githubUrl.backend}
                     target="_blank"
@@ -488,7 +488,7 @@ export default function ProjectDetailPage() {
                   </motion.a>
                 )}
 
-                {!staticProj?.githubUrl?.frontend && !staticProj?.githubUrl?.backend && (
+                {(!staticProj?.githubUrl || typeof staticProj.githubUrl !== 'object' || (!staticProj.githubUrl.frontend && !staticProj.githubUrl.backend)) && (
                   <p className="font-paragraph italic text-lg text-medium-gray text-center py-8">
                     Repository links coming soon
                   </p>

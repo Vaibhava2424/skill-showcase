@@ -5,8 +5,7 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { BaseCrudService } from '@/integrations';
 import { Certificates } from '@/entities';
-import { ExternalLink, Award, Calendar } from 'lucide-react';
-import { format } from 'date-fns';
+import { ExternalLink, Award } from 'lucide-react';
 
 const certVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -31,11 +30,11 @@ export default function CertificatesPage() {
   const loadCertificates = async () => {
     setIsLoading(true);
     const { items } = await BaseCrudService.getAll<Certificates>('certificates');
-    // Sort by issue date, newest first
+    // Sort by id
     const sortedItems = items.sort((a, b) => {
-      if (!a.issueDate) return 1;
-      if (!b.issueDate) return -1;
-      return new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime();
+      const aId = a.id || 0;
+      const bId = b.id || 0;
+      return bId - aId;
     });
     setCertificates(sortedItems);
     setIsLoading(false);
@@ -100,22 +99,6 @@ export default function CertificatesPage() {
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.3 }}
                     >
-                      {certificate.certificateImage && (
-                        <div className="relative w-full aspect-[16/10] overflow-hidden bg-charcoal">
-                          <Image
-                            src={certificate.certificateImage}
-                            alt={certificate.title || 'Certificate'}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            width={800}
-                          />
-                          <motion.div
-                            className="absolute inset-0 bg-accent-orange opacity-0 group-hover:opacity-10"
-                            initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 0.1 }}
-                          />
-                        </div>
-                      )}
-                      
                       <div className="p-8 flex-1 flex flex-col">
                         <div className="flex items-start gap-3 mb-4">
                           <motion.div
@@ -129,45 +112,22 @@ export default function CertificatesPage() {
                           </h3>
                         </div>
                         
-                        {certificate.issuingOrganization && (
-                          <p className="font-paragraph italic text-lg text-light-gray mb-4">
-                            {certificate.issuingOrganization}
+                        {certificate.description && (
+                          <p className="font-paragraph italic text-lg text-light-gray mb-6 flex-1">
+                            {certificate.description}
                           </p>
                         )}
                         
-                        <div className="space-y-3 mb-6 flex-1">
-                          {certificate.issueDate && (
-                            <motion.div
-                              className="flex items-center gap-2"
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.4 }}
-                              viewport={{ once: true }}
-                            >
-                              <Calendar className="w-4 h-4 text-accent-orange opacity-70" />
-                              <p className="font-heading uppercase text-sm text-medium-gray tracking-wider opacity-70">
-                                Issued {format(new Date(certificate.issueDate), 'MMMM yyyy')}
-                              </p>
-                            </motion.div>
-                          )}
-                          
-                          {certificate.credentialId && (
-                            <p className="font-heading uppercase text-xs text-medium-gray tracking-wider opacity-70">
-                              ID: {certificate.credentialId}
-                            </p>
-                          )}
-                        </div>
-                        
-                        {certificate.credentialUrl && (
+                        {certificate.liveUrl ? (
                           <motion.a
-                            href={certificate.credentialUrl}
+                            href={certificate.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 font-heading uppercase text-sm text-accent-orange tracking-wider hover:text-accent-orange-soft transition-colors border-2 border-accent-orange/30 px-4 py-2 hover:border-accent-orange hover:bg-accent-orange/10 w-fit"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            Verify Credential
+                            View Certificate
                             <motion.div
                               animate={{ x: [0, 3, 0] }}
                               transition={{ duration: 1.5, repeat: Infinity }}
@@ -175,6 +135,10 @@ export default function CertificatesPage() {
                               <ExternalLink className="w-4 h-4" />
                             </motion.div>
                           </motion.a>
+                        ) : (
+                          <p className="font-heading uppercase text-sm text-medium-gray tracking-wider opacity-70">
+                            {certificate.fallbackText || 'links yet to be added'}
+                          </p>
                         )}
                       </div>
                     </motion.div>
@@ -191,10 +155,9 @@ export default function CertificatesPage() {
               viewport={{ once: true }}
               className="bg-charcoal border-2 border-accent-orange/30 p-12 hover:border-accent-orange transition-colors"
             >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
                 {[
                   { label: certificates.length, desc: 'Professional Certifications' },
-                  { label: new Set(certificates.map(c => c.issuingOrganization)).size, desc: 'Issuing Organizations' },
                   { label: 100, desc: 'Verified Credentials' }
                 ].map((stat, index) => (
                   <motion.div

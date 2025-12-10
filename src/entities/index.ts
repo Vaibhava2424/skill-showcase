@@ -23,6 +23,14 @@ export interface Certificates {
   credentialUrl?: string;
   /** @wixFieldType image */
   certificateImage?: string;
+  /** @wixFieldType number */
+  id?: number;
+  /** @wixFieldType text */
+  description?: string;
+  /** @wixFieldType url */
+  liveUrl?: string;
+  /** @wixFieldType text */
+  fallbackText?: string;
 }
 
 
