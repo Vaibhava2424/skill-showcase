@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { Projects } from '@/entities';
 import { ExternalLink } from 'lucide-react';
-import { BaseCrudService } from '@/integrations';
+
+// ==== IMPORT LOCAL PROJECTS LIST ====
+import { projectsList } from '@/data/ProjectsList';
 
 const categories = ['All', 'MERN', 'Responsive', 'AI', 'Other', 'Frontend'];
 
@@ -15,10 +16,7 @@ const filterVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.05,
-      duration: 0.3,
-    },
+    transition: { delay: i * 0.05, duration: 0.3 },
   }),
   exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
 };
@@ -28,38 +26,44 @@ const cardVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.05,
-      duration: 0.4,
-    },
+    transition: { delay: i * 0.05, duration: 0.4 },
   }),
   exit: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
 
 export default function PortfolioPage() {
-  const [projects, setProjects] = useState<Projects[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<Projects[]>([]);
+  const [projects, setProjects] = useState<any[]>([]);
+  const [filteredProjects, setFilteredProjects] = useState<any[]>([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [isLoading, setIsLoading] = useState(true);
 
+  // ===== Load local projects into correct structure =====
   useEffect(() => {
-    loadProjects();
+    setIsLoading(true);
+
+    const mapped = projectsList.map((p: any) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      thumbnail: p.image,
+      technologies: p.techStack?.join(', ') || '',
+      category: p.category || '',
+      link: p.link,
+      github: p.github || null,
+    }));
+
+    setProjects(mapped);
+    setFilteredProjects(mapped);
+    setIsLoading(false);
   }, []);
 
-  const loadProjects = async () => {
-    setIsLoading(true);
-    const { items } = await BaseCrudService.getAll<Projects>('projects');
-    setProjects(items);
-    setFilteredProjects(items);
-    setIsLoading(false);
-  };
-
+  // ===== Apply Filter =====
   useEffect(() => {
     if (activeFilter === 'All') {
       setFilteredProjects(projects);
     } else {
-      const filtered = projects.filter(project => 
-        project.category?.toLowerCase() === activeFilter.toLowerCase()
+      const filtered = projects.filter(
+        project => project.category?.toLowerCase() === activeFilter.toLowerCase()
       );
       setFilteredProjects(filtered);
     }
@@ -68,7 +72,7 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-black">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="w-full max-w-[120rem] mx-auto px-8 py-24">
         <motion.div
@@ -85,7 +89,7 @@ export default function PortfolioPage() {
           </p>
         </motion.div>
 
-        {/* Filter Buttons - Stylish Animation */}
+        {/* Filter Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,21 +126,13 @@ export default function PortfolioPage() {
 
         {/* Projects Grid */}
         {isLoading ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-24"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24">
             <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
               Loading projects...
             </p>
           </motion.div>
         ) : filteredProjects.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-24"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24">
             <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
               No projects found
             </p>
@@ -145,14 +141,11 @@ export default function PortfolioPage() {
             </p>
           </motion.div>
         ) : (
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <motion.div
-                  key={project._id}
+                  key={project.id}
                   custom={index}
                   variants={cardVariants}
                   initial="hidden"
@@ -160,26 +153,23 @@ export default function PortfolioPage() {
                   exit="exit"
                   layout
                 >
-                  <Link
-                    to={`/portfolio/${project._id}`}
-                    className="group block h-full"
-                  >
+                  <Link to={`/portfolio/${project.id}`} className="group block h-full">
                     <div className="relative overflow-hidden mb-4 aspect-[4/3] bg-charcoal">
                       {project.thumbnail && (
                         <Image
                           src={project.thumbnail}
-                          alt={project.title || 'Project thumbnail'}
+                          alt={project.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           width={600}
                         />
                       )}
+
                       <motion.div
                         className="absolute inset-0 bg-accent-orange opacity-0 group-hover:opacity-20 transition-opacity duration-300"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 0.2 }}
                       />
-                      
-                      {/* Hover overlay with category */}
+
                       <motion.div
                         className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         initial={{ opacity: 0 }}
@@ -198,12 +188,13 @@ export default function PortfolioPage() {
                         </motion.div>
                       </motion.div>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <div className="flex items-start justify-between gap-4">
                         <h3 className="font-heading uppercase text-xl text-white tracking-wider group-hover:text-accent-orange transition-colors">
                           {project.title}
                         </h3>
+
                         {project.category && (
                           <motion.span
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -214,13 +205,13 @@ export default function PortfolioPage() {
                           </motion.span>
                         )}
                       </div>
-                      
+
                       {project.description && (
                         <p className="font-paragraph italic text-base text-light-gray line-clamp-2">
                           {project.description}
                         </p>
                       )}
-                      
+
                       {project.technologies && (
                         <p className="font-heading uppercase text-xs text-medium-gray tracking-wider opacity-70">
                           {project.technologies}
