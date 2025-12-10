@@ -1,203 +1,86 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Image } from '@/components/ui/image';
-import { ExternalLink } from 'lucide-react';
+import ProjectCard, { ProjectCardProps } from '@/components/ProjectCard';
 
-// =====================================
-// REPLACE IMPORT WITH LOCAL ARRAY
-// =====================================
-
- const projectsList = [
-    // ======== MAIN PROJECTS ========
-
-    {
-      id:1,
-      title: "Jobby App",
-      description: "A dynamic job listing platform with JWT authentication, protected routes, API integration, and responsive UI. Built using React.js and Node.js with REST APIs. Features job listings, filters, company profiles, and secure login/signup flow.⚡ Note: Login may take a few seconds initially due to backend warm-up — this is a sample project environment",
-      link: "https://jobbyapp-liart.vercel.app/",
-      github: {
-          frontend: "https://github.com/Vaibhava2424/Jobby-App",
-          backend: "https://github.com/Vaibhava2424/Jobby-App-Apis"
-      },
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233008/Screenshot_2025-11-03_102043_cttqul.png",
-      techStack: ["React", "Node.js", "JWT", "CSS"],
-      category: "mern",
-    },
-    {
-      id:2,
-      title: "Law Guide",
-      description:
-        "A team project developed during a no-code hackathon to provide structured legal information on government schemes, IPC sections, and public legal resources. Built entirely using AI-powered tools, it offers an intuitive interface, real-time policy insights, and smooth navigation. I contributed to content structuring, UI/UX, and flow logic.",
-      link: "https://p-188620.lovable.app/",
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233302/Screenshot_2025-09-18_103807_y98rfm.png",
-      techStack: ["Figma", "Relume", "Builder.io", "Lovable"],
-      category: "AI",
-    },
-    {
-      id:3,
-      title: "SubTrack",
-      description:
-        "A UI/UX subscription-tracking project designed to simplify OTT management for users. It includes features like subscription reminders, trending content suggestions, discount coupons, and AI-powered enhancements. Designed in Figma for a seamless and visually clean user flow.",
-      link: "https://www.figma.com/design/dzo7eVJZGCpfFZ3D04AD8q/Vaibhava_project",
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233258/Screenshot_2025-11-04_104400_h9szgl.png",
-      techStack: ["Figma", "UI/UX"],
-      category: "other",
-    },
-    {
-      id:89,
-      title: "Nextjs Project",
-      description: "A simple e-commerce front-end built with Next.js, featuring multi-page navigation, product listings, and a clean responsive UI. The platform includes pages for Home, About, Products, Cart, and Feedback, offering users a smooth browsing experience. Integrated with dynamic routing and modern layouts, it serves as a foundation for future e-commerce expansion.",
-      link: "https://next-js-project-eight-mu.vercel.app",
-      github: {
-          frontend: "https://github.com/Vaibhava2424/NextJs-Project",
-      },
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1763011639/Screenshot_2025-11-13_105705_jjxlvm.png",
-      techStack: ["Nextjs","Reactkjs", "Tailwind CSS"],
-      category: "frontend",
-    },
-    {
-      id:4,
-      title: "AI Chatbot",
-      description:
-        "Developed a functional AI chatbot capable of interacting with users and answering queries in real-time. Built using BotPress tools, integrated NLP features, and tested through real-time chat previews. Focused on improving conversational design, automation, and AI workflows.",
-      link: "https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2024/12/28/13/20241228132934-Q9SXG0M8.json",
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233084/Screenshot_2025-11-04_104057_ffa9di.png",
-      techStack: ["BotPress WorkSpace", "BotPress Studio", "BotPress Web Chat Preview"],
-      category: "AI",
-    },
-    {
-      id:5,
-      title: "Food Munch",
-      description:
-        "A personal project where I developed a food-centric website to bring together food lovers and culinary enthusiasts. Built using HTML and CSS, it showcases recipes, food blogs, and trending dishes in a visually appealing and user-friendly layout. The website focuses on intuitive navigation, high-quality visuals, and engaging content, making it easy for users to explore different cuisines. This project helped me refine my web development skills while blending creativity with functionality.",
-      link: "https://foodmunch246.niat.tech/",
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232680/Screenshot_2025-11-04_103353_jw6iys.png",
-      techStack: ["HTML", "CSS", "Bootstrap"],
-      category: "responsive",
-      
-    },
-    {
-      id:6,
-      title: "Tasty Kitchens",
-      description: "Tasty Kitchens – Food ordering full-stack platform using React + Vite frontend and Node.js + MongoDB backend. Features restaurant listing, menus, authentication, and orders simulation.",
-      link: "https://tasty-kitchens-nu.vercel.app/",
-      github: {
-          frontend: "https://github.com/Vaibhava2424/Tasty-Kitchens",
-          backend: "https://github.com/Vaibhava2424/Tasty-Kitchen-apis"
-      },
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232980/Screenshot_2025-09-18_102156_p5c6pw.png",
-      techStack: ["React", "Node.js", "Express", "MongoDB"],
-      category: "mern",
-    },
-    {
-      id:7,
-      title: "BookFlow",
-      description: "A full-stack book management application developed using React + TypeScript on frontend and Node.js with MongoDB backend. Implements secure JWT authentication and CRUD operations for managing books with an elegant UI. ⚡ Note: Login may take a few seconds initially due to backend warm-up — this is a sample project environment",
-      link: "https://bookflow-eosin.vercel.app/",
-      github: {
-          frontend: "https://github.com/Vaibhava2424/bookFlow",
-          backend: "https://github.com/Vaibhava2424/BookFlow-apis"
-      },
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232946/Screenshot_2025-11-04_103823_iggpak.png",
-      techStack: ["React", "TypeScript", "Node.js", "MongoDB"],
-      category: "mern",
-    },
-    
-
-    // ======== SMALL PROJECTS ADDED ========
-
-    {
-      id:8,
-      title: "Multi-Consultancy Webpage",
-      description:
-        "A professional consultancy-style landing page featuring a responsive layout, service highlights, and structured content sections. Built using Bootstrap with clean styling for corporate UI.",
-      link: "https://jefnncefjv.niat.tech/",
-      image: "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233543/Screenshot_2025-11-04_104817_da4aag.png",
-      techStack: ["HTML", "CSS", "Bootstrap"],
-      category: "responsive",
-    },
-    {
-      id:9,
-      title: "Nature Tourism Page",
-      description:
-        "A nature-themed tourism landing page built with Bootstrap grids and mobile-first layout. Focuses on simplicity, scenic layout, and travel-inspired design blocks.",
-      link: "https://jwncwndcj.niat.tech/",
-      image:"https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233653/Screenshot_2025-11-04_104946_cu1bgt.png",
-      techStack: ["HTML", "CSS", "Bootstrap"],
-      category: "responsive",
-    },
-    {
-      id:10,
-      title: "Wikipedia Search Engine",
-      description:
-        "A real-time Wikipedia search application using Fetch API to pull search results. Built with pure JavaScript and dynamic DOM rendering.",
-      link: "https://wikipedia64.niat.tech/",
-      image:
-        "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233760/Screenshot_2025-11-04_105222_aknvdo.png",
-      techStack: ["HTML", "CSS", "JavaScript"],
-      category: "other",
-    },
-    {
-      id:11,
-      title: "Number Guess Game",
-      description:
-        "A fun interactive guessing game built using core JavaScript logic and DOM updates. Provides feedback on correct guesses and attempts with a clean UI.",
-      link: "https://guessingame24.niat.tech/",
-      image:
-        "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233794/Screenshot_2025-11-04_105300_ytsjhi.png",
-      techStack: ["HTML", "CSS", "JavaScript"],
-      category: "other",
-    },
-    {
-      id:12,
-      title: "Wedding Celebration Page",
-      description:
-        "A vibrant and festive wedding theme design built with Bootstrap and custom UI blocks to match wedding aesthetics and event layout patterns.",
-      link: "https://marriagefestive.niat.tech/",
-      image:
-        "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762233973/Screenshot_2025-11-04_105600_paccxc.png",
-      techStack: ["HTML", "CSS", "Bootstrap"],
-      category: "responsive",
-    },
-    {
-      id:13,
-      title: "Tech Trends Showcase",
-      description:
-        "A technology-trends themed website created with Bootstrap and supported by AI-assisted design tools. Features a futuristic digital look.",
-      link: "https://futurthink11.niat.tech/",
-      image:
-        "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762234092/Screenshot_2025-11-04_105722_sntunq.png",
-      techStack: ["HTML", "CSS", "Bootstrap"],
-      category: "AI",
-    },
-    {
-      id:14,
-      title: "FitPro Fitness Page",
-      description:
-        "A responsive fitness landing page showcasing workout services, trainers, and brand hero section. Fully mobile-optimized.",
-      link: "https://fitprocom.niat.tech/",
-      image:
-        "https://res.cloudinarxy.com/dodfv5sbg/image/upload/v1762234177/Screenshot_2025-11-04_105921_rx2krh.png",
-      techStack: ["HTML", "CSS", "Bootstrap"],
-      category: "responsive",
-    },
-  ];
-
-// =====================================
-// FILTER CATEGORIES
-// =====================================
-
-const categories = ["All", "MERN", "Responsive", "AI", "Other", "Frontend"];
+// Static projects array
+const projectsList: ProjectCardProps[] = [
+  {
+    title: 'E-Commerce Platform',
+    description: 'A full-stack e-commerce solution with product catalog, shopping cart, and payment integration using Stripe.',
+    image: 'https://static.wixstatic.com/media/98427a_0fa9040270e540be9bef19bda71ded26~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    liveUrl: 'https://example.com/ecommerce',
+    githubUrl: 'https://github.com/example/ecommerce',
+  },
+  {
+    title: 'Responsive Portfolio Website',
+    description: 'A modern, fully responsive portfolio website showcasing design and development work with smooth animations.',
+    image: 'https://static.wixstatic.com/media/98427a_6162b0febb5a4e1288eb2e1a0d6a331f~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'Tailwind CSS', 'Framer Motion'],
+    liveUrl: 'https://example.com/portfolio',
+    githubUrl: 'https://github.com/example/portfolio',
+  },
+  {
+    title: 'AI Chat Application',
+    description: 'An intelligent chat application powered by AI, featuring real-time messaging and smart responses.',
+    image: 'https://static.wixstatic.com/media/98427a_852eb5435d044884b574bdef5c7d924f~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'OpenAI API', 'WebSocket', 'Express'],
+    liveUrl: 'https://example.com/ai-chat',
+    githubUrl: 'https://github.com/example/ai-chat',
+  },
+  {
+    title: 'Task Management Dashboard',
+    description: 'A comprehensive task management tool with drag-and-drop functionality and real-time updates.',
+    image: 'https://static.wixstatic.com/media/98427a_90b662a47cf444ab8cc848017266e727~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'Redux', 'Tailwind CSS'],
+    liveUrl: 'https://example.com/tasks',
+    githubUrl: 'https://github.com/example/tasks',
+  },
+  {
+    title: 'Social Media Analytics Tool',
+    description: 'An analytics dashboard for tracking social media performance across multiple platforms with detailed insights.',
+    image: 'https://static.wixstatic.com/media/98427a_597c216a6b734dd2a7725c7709863039~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'Node.js', 'PostgreSQL', 'Chart.js'],
+    liveUrl: 'https://example.com/analytics',
+    githubUrl: 'https://github.com/example/analytics',
+  },
+  {
+    title: 'Weather Forecast App',
+    description: 'A beautiful weather application with real-time data and detailed forecasts for any location.',
+    image: 'https://static.wixstatic.com/media/98427a_93343545a33d4c60ac02187f25224006~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'OpenWeather API', 'Tailwind CSS'],
+    liveUrl: 'https://example.com/weather',
+    githubUrl: 'https://github.com/example/weather',
+  },
+  {
+    title: 'Machine Learning Model Trainer',
+    description: 'A web interface for training and testing machine learning models with visualization and real-time feedback.',
+    image: 'https://static.wixstatic.com/media/98427a_0461cee5f8924873bf16de234391e0be~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'Python', 'TensorFlow', 'Flask'],
+    liveUrl: 'https://example.com/ml-trainer',
+    githubUrl: 'https://github.com/example/ml-trainer',
+  },
+  {
+    title: 'Video Streaming Platform',
+    description: 'A Netflix-like streaming platform with user authentication and content recommendations.',
+    image: 'https://static.wixstatic.com/media/98427a_b2f7ff77ccdb4895903271374a933a99~mv2.png?originWidth=576&originHeight=384',
+    tags: ['React', 'Node.js', 'MongoDB', 'HLS.js'],
+    liveUrl: 'https://example.com/streaming',
+    githubUrl: 'https://github.com/example/streaming',
+  },
+];
 
 const filterVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.05, duration: 0.3 },
+    transition: {
+      delay: i * 0.05,
+      duration: 0.3,
+    },
   }),
   exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
 };
@@ -207,53 +90,35 @@ const cardVariants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.05, duration: 0.4 },
+    transition: {
+      delay: i * 0.05,
+      duration: 0.4,
+    },
   }),
   exit: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
 
-// =====================================
-// MAIN PAGE COMPONENT
-// =====================================
-
 export default function PortfolioPage() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [filteredProjects, setFilteredProjects] = useState<any[]>([]);
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [isLoading, setIsLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState('All');
 
-  // ===== Load local projects into correct structure =====
-  useEffect(() => {
-    setIsLoading(true);
-
-    const mapped = projectsList.map((p: any) => ({
-      id: p.id,
-      title: p.title,
-      description: p.description,
-      thumbnail: p.image,
-      technologies: p.techStack?.join(", ") || "",
-      category: p.category || "",
-      link: p.link,
-      github: p.github || null,
-    }));
-
-    setProjects(mapped);
-    setFilteredProjects(mapped);
-    setIsLoading(false);
+  // Get unique tags from all projects
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    projectsList.forEach((project) => {
+      project.tags.forEach((tag) => tags.add(tag));
+    });
+    return ['All', ...Array.from(tags).sort()];
   }, []);
 
-  // ===== Apply Filter =====
-  useEffect(() => {
-    if (activeFilter === "All") {
-      setFilteredProjects(projects);
-    } else {
-      const filtered = projects.filter(
-        (project) =>
-          project.category?.toLowerCase() === activeFilter.toLowerCase()
-      );
-      setFilteredProjects(filtered);
+  // Filter projects based on selected tag
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'All') {
+      return projectsList;
     }
-  }, [activeFilter, projects]);
+    return projectsList.filter((project) =>
+      project.tags.includes(activeFilter)
+    );
+  }, [activeFilter]);
 
   return (
     <div className="min-h-screen bg-black">
@@ -271,8 +136,7 @@ export default function PortfolioPage() {
             MY <span className="text-accent-orange">WORK</span>
           </h1>
           <p className="font-paragraph italic text-xl text-light-gray max-w-3xl mx-auto">
-            A comprehensive showcase of all my projects, innovations, and
-            creative endeavors across diverse technologies and domains
+            A comprehensive showcase of all my projects, innovations, and creative endeavors across diverse technologies and domains
           </p>
         </motion.div>
 
@@ -284,45 +148,35 @@ export default function PortfolioPage() {
           className="flex flex-wrap justify-center gap-3 mb-16"
         >
           <AnimatePresence mode="wait">
-            {categories.map((category, i) => (
+            {allTags.map((tag, i) => (
               <motion.button
-                key={category}
+                key={tag}
                 custom={i}
                 variants={filterVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                onClick={() => setActiveFilter(category)}
+                onClick={() => setActiveFilter(tag)}
                 className={`relative px-6 py-3 font-heading uppercase text-sm tracking-wider font-bold transition-all duration-300 overflow-hidden group ${
-                  activeFilter === category
-                    ? "bg-accent-orange text-black"
-                    : "bg-charcoal text-light-gray border-2 border-accent-orange/30 hover:border-accent-orange"
+                  activeFilter === tag
+                    ? 'bg-accent-orange text-black'
+                    : 'bg-charcoal text-light-gray border-2 border-accent-orange/30 hover:border-accent-orange'
                 }`}
               >
                 <motion.div
                   className="absolute inset-0 bg-accent-orange/20"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
                   transition={{ duration: 0.5 }}
                 />
-                <span className="relative z-10">{category}</span>
+                <span className="relative z-10">{tag}</span>
               </motion.button>
             ))}
           </AnimatePresence>
         </motion.div>
 
         {/* Projects Grid */}
-        {isLoading ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-24"
-          >
-            <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
-              Loading projects...
-            </p>
-          </motion.div>
-        ) : filteredProjects.length === 0 ? (
+        {filteredProjects.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -332,18 +186,18 @@ export default function PortfolioPage() {
               No projects found
             </p>
             <p className="font-paragraph italic text-lg text-light-gray">
-              Try selecting a different category
+              Try selecting a different technology
             </p>
           </motion.div>
         ) : (
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <motion.div
-                  key={project.id}
+                  key={project.title}
                   custom={index}
                   variants={cardVariants}
                   initial="hidden"
@@ -351,72 +205,7 @@ export default function PortfolioPage() {
                   exit="exit"
                   layout
                 >
-                  <Link to={`/portfolio/${project.id}`} className="group block h-full">
-                    <div className="relative overflow-hidden mb-4 aspect-[4/3] bg-charcoal">
-                      {project.thumbnail && (
-                        <Image
-                          src={project.thumbnail}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          width={600}
-                        />
-                      )}
-
-                      <motion.div
-                        className="absolute inset-0 bg-accent-orange opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 0.2 }}
-                      />
-
-                      <motion.div
-                        className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                      >
-                        <motion.div
-                          initial={{ scale: 0.8, opacity: 0 }}
-                          whileHover={{ scale: 1, opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                          className="text-center"
-                        >
-                          <p className="font-heading uppercase text-accent-orange text-sm tracking-wider mb-2">
-                            View Project
-                          </p>
-                          <ExternalLink className="w-6 h-6 text-accent-orange mx-auto" />
-                        </motion.div>
-                      </motion.div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="font-heading uppercase text-xl text-white tracking-wider group-hover:text-accent-orange transition-colors">
-                          {project.title}
-                        </h3>
-
-                        {project.category && (
-                          <motion.span
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="font-heading uppercase text-xs text-black bg-accent-orange px-3 py-1 whitespace-nowrap font-bold"
-                          >
-                            {project.category}
-                          </motion.span>
-                        )}
-                      </div>
-
-                      {project.description && (
-                        <p className="font-paragraph italic text-base text-light-gray line-clamp-2">
-                          {project.description}
-                        </p>
-                      )}
-
-                      {project.technologies && (
-                        <p className="font-heading uppercase text-xs text-medium-gray tracking-wider opacity-70">
-                          {project.technologies}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
+                  <ProjectCard {...project} />
                 </motion.div>
               ))}
             </AnimatePresence>
