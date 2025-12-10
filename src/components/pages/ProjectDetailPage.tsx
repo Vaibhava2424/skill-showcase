@@ -77,17 +77,6 @@ const staticProjects: ProjectCardProps[] =  [
     category: "AI",
   },
   {
-    id: 6,
-    title: "Food Munch",
-    description:
-      "A personal project where I developed a food-centric website to bring together food lovers and culinary enthusiasts. Built using HTML and CSS, it showcases recipes, food blogs, and trending dishes in a visually appealing and user-friendly layout.",
-    liveUrl: "https://foodmunch246.niat.tech/",
-    image:
-      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232680/Screenshot_2025-11-04_103353_jw6iys.png",
-    tags: ["HTML", "CSS", "Bootstrap"],
-    category: "responsive",
-  },
-  {
     id: 7,
     title: "Tasty Kitchens",
     description:
@@ -116,6 +105,17 @@ const staticProjects: ProjectCardProps[] =  [
       "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232946/Screenshot_2025-11-04_103823_iggpak.png",
     tags: ["React", "TypeScript", "Node.js", "MongoDB"],
     category: "mern",
+  },
+  {
+    id: 6,
+    title: "Food Munch",
+    description:
+      "A personal project where I developed a food-centric website to bring together food lovers and culinary enthusiasts. Built using HTML and CSS, it showcases recipes, food blogs, and trending dishes in a visually appealing and user-friendly layout.",
+    liveUrl: "https://foodmunch246.niat.tech/",
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1762232680/Screenshot_2025-11-04_103353_jw6iys.png",
+    tags: ["HTML", "CSS", "Bootstrap"],
+    category: "responsive",
   },
 
   // SMALL PROJECTS
