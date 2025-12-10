@@ -10,7 +10,7 @@ export interface ProjectCardProps {
   image: string;
   tags: string[];
   category: string;
-  githubUrl?: {
+  githubUrl?: string | {
     frontend?: string;
     backend?: string;
   };
@@ -60,7 +60,7 @@ export default function ProjectCard({
         <p className="font-paragraph italic text-base text-light-gray line-clamp-3 flex-grow">
           {description}
         </p>
-        
+
         {/* Buttons Section */}
         <div className="flex flex-wrap gap-3 pt-4 border-t border-accent-orange/20">
           {id && (
