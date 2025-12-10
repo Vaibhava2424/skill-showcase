@@ -33,7 +33,6 @@ export default function Footer() {
                 
                 <a
   href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/portfolio"
-  target="_blank"
   rel="noopener noreferrer"
   className="text-accent-orange hover:underline"
 >
@@ -45,7 +44,6 @@ export default function Footer() {
                 
                 <a
   href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/skills"
-  target="_blank"
   rel="noopener noreferrer"
   className="text-accent-orange hover:underline"
 >
@@ -54,14 +52,13 @@ export default function Footer() {
 
               </p>
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
-                Certifications
+                
                 <a
   href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/certificates"
-  target="_blank"
   rel="noopener noreferrer"
   className="text-accent-orange hover:underline"
 >
-  GitHub
+  Certifications
 </a>
 
               </p>
