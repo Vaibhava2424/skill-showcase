@@ -1,9 +1,6 @@
-import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Image } from '@/components/ui/image';
-import { BaseCrudService } from '@/integrations';
 import { Certificates } from '@/entities';
 import { ExternalLink, Award } from 'lucide-react';
 
@@ -19,26 +16,19 @@ const certVariants = {
   }),
 };
 
+const staticCertificates: Certificates[] = [
+  {
+    _id: '1',
+    id: 1,
+    title: 'Ethical Hacking 101 Workshop',
+    description: 'Comprehensive workshop covering ethical hacking principles, penetration testing methodologies, and security best practices.',
+    liveUrl: 'https://example.com/ethical-hacking-101',
+    fallbackText: 'links yet to be added',
+  },
+];
+
 export default function CertificatesPage() {
-  const [certificates, setCertificates] = useState<Certificates[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    loadCertificates();
-  }, []);
-
-  const loadCertificates = async () => {
-    setIsLoading(true);
-    const { items } = await BaseCrudService.getAll<Certificates>('certificates');
-    // Sort by id
-    const sortedItems = items.sort((a, b) => {
-      const aId = a.id || 0;
-      const bId = b.id || 0;
-      return bId - aId;
-    });
-    setCertificates(sortedItems);
-    setIsLoading(false);
-  };
+  const certificates = staticCertificates;
 
   return (
     <div className="min-h-screen bg-black">
@@ -60,17 +50,7 @@ export default function CertificatesPage() {
           </p>
         </motion.div>
 
-        {isLoading ? (
-          <div className="text-center py-24">
-            <motion.p
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="font-heading uppercase text-xl text-accent-orange tracking-wider"
-            >
-              Loading certificates...
-            </motion.p>
-          </div>
-        ) : certificates.length === 0 ? (
+        {certificates.length === 0 ? (
           <div className="text-center py-24">
             <p className="font-heading uppercase text-xl text-accent-orange tracking-wider">
               No certificates found

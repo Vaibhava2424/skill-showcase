@@ -12,6 +12,14 @@ export interface Certificates {
   _createdDate?: Date;
   _updatedDate?: Date;
   /** @wixFieldType text */
+  description?: string;
+  /** @wixFieldType text */
+  fallbackText?: string;
+  /** @wixFieldType url */
+  liveUrl?: string;
+  /** @wixFieldType number */
+  id?: number;
+  /** @wixFieldType text */
   title?: string;
   /** @wixFieldType text */
   issuingOrganization?: string;
@@ -23,14 +31,6 @@ export interface Certificates {
   credentialUrl?: string;
   /** @wixFieldType image */
   certificateImage?: string;
-  /** @wixFieldType number */
-  id?: number;
-  /** @wixFieldType text */
-  description?: string;
-  /** @wixFieldType url */
-  liveUrl?: string;
-  /** @wixFieldType text */
-  fallbackText?: string;
 }
 
 
