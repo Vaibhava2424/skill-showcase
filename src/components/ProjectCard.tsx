@@ -3,21 +3,22 @@ import { Image } from '@/components/ui/image';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export interface ProjectCardProps {
-  _id?: string;
+export interface ProjectCardProps { 
+  id?: string;
   title: string;
   description: string;
   image: string;
   tags: string[];
   category: string;
-  githubUrl?: string;
+  githubUrl?: {
+    frontend?: string;
+    backend?: string;
+  };
   liveUrl?: string;
-  frontend?: string;
-  backend?: string;
 }
 
 export default function ProjectCard({
-  _id,
+  id,
   title,
   description,
   image,
@@ -75,10 +76,10 @@ export default function ProjectCard({
         </div>
 
         {/* Buttons Section */}
-        <div className="flex gap-3 pt-4 border-t border-accent-orange/20">
-          {_id && (
+        <div className="flex flex-wrap gap-3 pt-4 border-t border-accent-orange/20">
+          {id && (
             <motion.button
-              onClick={() => navigate(`/portfolio/${_id}`)}
+              onClick={() => navigate(`/portfolio/${id}`)}
               className="flex-1 flex items-center justify-center gap-2 bg-accent-orange text-black font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange-soft transition-colors duration-300"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -87,15 +88,26 @@ export default function ProjectCard({
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           )}
-          {githubUrl && (
+          {githubUrl?.frontend && (
             <a
-              href={githubUrl}
+              href={githubUrl.frontend}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange text-accent-orange font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange hover:text-black transition-colors duration-300"
             >
               <Github className="w-4 h-4" />
-              GitHub
+              Frontend
+            </a>
+          )}
+          {githubUrl?.backend && (
+            <a
+              href={githubUrl.backend}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange text-accent-orange font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange hover:text-black transition-colors duration-300"
+            >
+              <Github className="w-4 h-4" />
+              Backend
             </a>
           )}
           {liveUrl && (
