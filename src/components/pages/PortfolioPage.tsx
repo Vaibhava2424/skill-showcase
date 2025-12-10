@@ -232,13 +232,6 @@ export default function PortfolioPage() {
     return ['All', ...Array.from(categories).sort()];
   }, []);
 
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    projectsList.forEach((project) => {
-      project.tags.forEach((tag) => tags.add(tag));
-    });
-    return ['All', ...Array.from(tags).sort()];
-  }, []);
 
   // Filter projects based on selected category or tag
   const filteredProjects = useMemo(() => {
