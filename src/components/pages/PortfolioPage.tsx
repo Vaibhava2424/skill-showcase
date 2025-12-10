@@ -297,21 +297,6 @@ export default function PortfolioPage() {
           >
             By Category
           </motion.button>
-          <motion.button
-            onClick={() => {
-              setFilterType('tag');
-              setActiveFilter('All');
-            }}
-            className={`px-6 py-3 font-heading uppercase text-sm tracking-wider font-bold transition-all duration-300 ${
-              filterType === 'tag'
-                ? 'bg-accent-orange text-black'
-                : 'bg-charcoal text-light-gray border-2 border-accent-orange/30 hover:border-accent-orange'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            By Technology
-          </motion.button>
         </motion.div>
 
         {/* Filter Buttons */}
