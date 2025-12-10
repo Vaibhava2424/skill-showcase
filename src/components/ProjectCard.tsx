@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Image } from '@/components/ui/image';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export interface ProjectCardProps {
+  _id?: string;
   title: string;
   description: string;
   image: string;
@@ -10,9 +12,12 @@ export interface ProjectCardProps {
   category: string;
   githubUrl?: string;
   liveUrl?: string;
+  frontend?: string;
+  backend?: string;
 }
 
 export default function ProjectCard({
+  _id,
   title,
   description,
   image,
@@ -20,6 +25,7 @@ export default function ProjectCard({
   githubUrl,
   liveUrl,
 }: ProjectCardProps) {
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -70,16 +76,16 @@ export default function ProjectCard({
 
         {/* Buttons Section */}
         <div className="flex gap-3 pt-4 border-t border-accent-orange/20">
-          {liveUrl && (
-            <a
-              href={liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+          {_id && (
+            <motion.button
+              onClick={() => navigate(`/portfolio/${_id}`)}
               className="flex-1 flex items-center justify-center gap-2 bg-accent-orange text-black font-heading uppercase text-sm tracking-wider font-bold py-3 hover:bg-accent-orange-soft transition-colors duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <ExternalLink className="w-4 h-4" />
-              View Live
-            </a>
+              View Details
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
           )}
           {githubUrl && (
             <a
@@ -90,6 +96,17 @@ export default function ProjectCard({
             >
               <Github className="w-4 h-4" />
               GitHub
+            </a>
+          )}
+          {liveUrl && (
+            <a
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 border-2 border-accent-orange/50 text-light-gray font-heading uppercase text-sm tracking-wider font-bold py-3 hover:border-accent-orange hover:text-accent-orange transition-colors duration-300"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Live
             </a>
           )}
         </div>

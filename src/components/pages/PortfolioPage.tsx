@@ -7,6 +7,7 @@ import ProjectCard, { ProjectCardProps } from '@/components/ProjectCard';
 // Static projects array
 const projectsList: ProjectCardProps[] = [
   {
+    _id: 'ecommerce-platform',
     title: 'E-Commerce Platform',
     description: 'A full-stack e-commerce solution with product catalog, shopping cart, and payment integration using Stripe.',
     image: 'https://static.wixstatic.com/media/98427a_0fa9040270e540be9bef19bda71ded26~mv2.png?originWidth=576&originHeight=384',
@@ -14,8 +15,11 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     liveUrl: 'https://example.com/ecommerce',
     githubUrl: 'https://github.com/example/ecommerce',
+    frontend: 'https://github.com/example/ecommerce-frontend',
+    backend: 'https://github.com/example/ecommerce-backend',
   },
   {
+    _id: 'portfolio-website',
     title: 'Responsive Portfolio Website',
     description: 'A modern, fully responsive portfolio website showcasing design and development work with smooth animations.',
     image: 'https://static.wixstatic.com/media/98427a_6162b0febb5a4e1288eb2e1a0d6a331f~mv2.png?originWidth=576&originHeight=384',
@@ -23,8 +27,10 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'Tailwind CSS', 'Framer Motion'],
     liveUrl: 'https://example.com/portfolio',
     githubUrl: 'https://github.com/example/portfolio',
+    frontend: 'https://github.com/example/portfolio-frontend',
   },
   {
+    _id: 'ai-chat-app',
     title: 'AI Chat Application',
     description: 'An intelligent chat application powered by AI, featuring real-time messaging and smart responses.',
     image: 'https://static.wixstatic.com/media/98427a_852eb5435d044884b574bdef5c7d924f~mv2.png?originWidth=576&originHeight=384',
@@ -32,8 +38,11 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'OpenAI API', 'WebSocket', 'Express'],
     liveUrl: 'https://example.com/ai-chat',
     githubUrl: 'https://github.com/example/ai-chat',
+    frontend: 'https://github.com/example/ai-chat-frontend',
+    backend: 'https://github.com/example/ai-chat-backend',
   },
   {
+    _id: 'task-dashboard',
     title: 'Task Management Dashboard',
     description: 'A comprehensive task management tool with drag-and-drop functionality and real-time updates.',
     image: 'https://static.wixstatic.com/media/98427a_90b662a47cf444ab8cc848017266e727~mv2.png?originWidth=576&originHeight=384',
@@ -41,8 +50,11 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'Redux', 'Tailwind CSS'],
     liveUrl: 'https://example.com/tasks',
     githubUrl: 'https://github.com/example/tasks',
+    frontend: 'https://github.com/example/tasks-frontend',
+    backend: 'https://github.com/example/tasks-backend',
   },
   {
+    _id: 'social-analytics',
     title: 'Social Media Analytics Tool',
     description: 'An analytics dashboard for tracking social media performance across multiple platforms with detailed insights.',
     image: 'https://static.wixstatic.com/media/98427a_597c216a6b734dd2a7725c7709863039~mv2.png?originWidth=576&originHeight=384',
@@ -50,8 +62,11 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'Node.js', 'PostgreSQL', 'Chart.js'],
     liveUrl: 'https://example.com/analytics',
     githubUrl: 'https://github.com/example/analytics',
+    frontend: 'https://github.com/example/analytics-frontend',
+    backend: 'https://github.com/example/analytics-backend',
   },
   {
+    _id: 'weather-app',
     title: 'Weather Forecast App',
     description: 'A beautiful weather application with real-time data and detailed forecasts for any location.',
     image: 'https://static.wixstatic.com/media/98427a_93343545a33d4c60ac02187f25224006~mv2.png?originWidth=576&originHeight=384',
@@ -59,8 +74,10 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'OpenWeather API', 'Tailwind CSS'],
     liveUrl: 'https://example.com/weather',
     githubUrl: 'https://github.com/example/weather',
+    frontend: 'https://github.com/example/weather-frontend',
   },
   {
+    _id: 'ml-trainer',
     title: 'Machine Learning Model Trainer',
     description: 'A web interface for training and testing machine learning models with visualization and real-time feedback.',
     image: 'https://static.wixstatic.com/media/98427a_0461cee5f8924873bf16de234391e0be~mv2.png?originWidth=576&originHeight=384',
@@ -68,8 +85,11 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'Python', 'TensorFlow', 'Flask'],
     liveUrl: 'https://example.com/ml-trainer',
     githubUrl: 'https://github.com/example/ml-trainer',
+    frontend: 'https://github.com/example/ml-trainer-frontend',
+    backend: 'https://github.com/example/ml-trainer-backend',
   },
   {
+    _id: 'video-streaming',
     title: 'Video Streaming Platform',
     description: 'A Netflix-like streaming platform with user authentication and content recommendations.',
     image: 'https://static.wixstatic.com/media/98427a_b2f7ff77ccdb4895903271374a933a99~mv2.png?originWidth=576&originHeight=384',
@@ -77,6 +97,8 @@ const projectsList: ProjectCardProps[] = [
     tags: ['React', 'Node.js', 'MongoDB', 'HLS.js'],
     liveUrl: 'https://example.com/streaming',
     githubUrl: 'https://github.com/example/streaming',
+    frontend: 'https://github.com/example/streaming-frontend',
+    backend: 'https://github.com/example/streaming-backend',
   },
 ];
 
