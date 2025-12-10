@@ -428,7 +428,7 @@ export default function HomePage() {
                                 </div>
 
                                 {/* Contact Button */}
-                                <a href={`mailto:${PROFILE_DATA.email}`} className="w-full">
+                                <a href="https://www.linkedin.com/in/vaibhava-raju-nadakuditi/" className="w-full">
                                     <button className="w-full py-3 bg-accent-orange text-black font-heading font-bold uppercase tracking-wider rounded hover:bg-accent-orange-soft transition-colors duration-300">
                                         Get In Touch
                                     </button>
