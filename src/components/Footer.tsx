@@ -30,13 +30,40 @@ export default function Footer() {
             </h3>
             <div className="space-y-2">
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
-                Portfolio
+                
+                <a
+  href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/portfolio"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-accent-orange hover:underline"
+>
+  Portfolio
+</a>
+
               </p>
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
-                Skills
+                
+                <a
+  href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/skills"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-accent-orange hover:underline"
+>
+  Skills
+</a>
+
               </p>
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
                 Certifications
+                <a
+  href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/certificates"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-accent-orange hover:underline"
+>
+  GitHub
+</a>
+
               </p>
             </div>
           </motion.div>
