@@ -6,10 +6,62 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { ExternalLink } from 'lucide-react';
 
-// ==== IMPORT LOCAL PROJECTS LIST ====
-import { projectsList } from '@/data/ProjectsList';
+// =====================================
+// REPLACE IMPORT WITH LOCAL ARRAY
+// =====================================
 
-const categories = ['All', 'MERN', 'Responsive', 'AI', 'Other', 'Frontend'];
+const projectsList = [
+  {
+    id: 1,
+    title: "TechTrends India",
+    description:
+      "A platform focused on informing and engaging visitors about technology trends and innovations in India.",
+    image: "/images/projects/techtrends.png",
+    techStack: ["HTML", "CSS", "JavaScript"],
+    category: "Frontend",
+    link: "#",
+    github: null,
+  },
+  {
+    id: 2,
+    title: "Food Munch",
+    description:
+      "A website for food lovers showcasing recipes, blogs, and trending dishes.",
+    image: "/images/projects/foodmunch.png",
+    techStack: ["HTML", "CSS"],
+    category: "Responsive",
+    link: "#",
+    github: null,
+  },
+  {
+    id: 3,
+    title: "Law Guide",
+    description:
+      "A legal resource platform covering state & central schemes, IPC sections, and related content.",
+    image: "/images/projects/lawguide.png",
+    techStack: ["HTML", "CSS", "JavaScript"],
+    category: "Frontend",
+    link: "#",
+    github: null,
+  },
+  {
+    id: 4,
+    title: "SubTrack",
+    description:
+      "A UI/UX project for managing OTT subscriptions with reminders and trending recommendations.",
+    image: "/images/projects/subtrack.png",
+    techStack: ["Figma", "UI/UX"],
+    category: "Other",
+    link: "#",
+    github: null,
+  },
+];
+
+// =====================================
+// FILTER CATEGORIES
+// =====================================
+
+const categories = ["All", "MERN", "Responsive", "AI", "Other", "Frontend"];
 
 const filterVariants = {
   hidden: { opacity: 0, y: -20 },
@@ -31,10 +83,14 @@ const cardVariants = {
   exit: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
 
+// =====================================
+// MAIN PAGE COMPONENT
+// =====================================
+
 export default function PortfolioPage() {
   const [projects, setProjects] = useState<any[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<any[]>([]);
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState("All");
   const [isLoading, setIsLoading] = useState(true);
 
   // ===== Load local projects into correct structure =====
@@ -46,8 +102,8 @@ export default function PortfolioPage() {
       title: p.title,
       description: p.description,
       thumbnail: p.image,
-      technologies: p.techStack?.join(', ') || '',
-      category: p.category || '',
+      technologies: p.techStack?.join(", ") || "",
+      category: p.category || "",
       link: p.link,
       github: p.github || null,
     }));
@@ -59,11 +115,12 @@ export default function PortfolioPage() {
 
   // ===== Apply Filter =====
   useEffect(() => {
-    if (activeFilter === 'All') {
+    if (activeFilter === "All") {
       setFilteredProjects(projects);
     } else {
       const filtered = projects.filter(
-        project => project.category?.toLowerCase() === activeFilter.toLowerCase()
+        (project) =>
+          project.category?.toLowerCase() === activeFilter.toLowerCase()
       );
       setFilteredProjects(filtered);
     }
@@ -85,7 +142,8 @@ export default function PortfolioPage() {
             MY <span className="text-accent-orange">WORK</span>
           </h1>
           <p className="font-paragraph italic text-xl text-light-gray max-w-3xl mx-auto">
-            A comprehensive showcase of all my projects, innovations, and creative endeavors across diverse technologies and domains
+            A comprehensive showcase of all my projects, innovations, and
+            creative endeavors across diverse technologies and domains
           </p>
         </motion.div>
 
@@ -108,14 +166,14 @@ export default function PortfolioPage() {
                 onClick={() => setActiveFilter(category)}
                 className={`relative px-6 py-3 font-heading uppercase text-sm tracking-wider font-bold transition-all duration-300 overflow-hidden group ${
                   activeFilter === category
-                    ? 'bg-accent-orange text-black'
-                    : 'bg-charcoal text-light-gray border-2 border-accent-orange/30 hover:border-accent-orange'
+                    ? "bg-accent-orange text-black"
+                    : "bg-charcoal text-light-gray border-2 border-accent-orange/30 hover:border-accent-orange"
                 }`}
               >
                 <motion.div
                   className="absolute inset-0 bg-accent-orange/20"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "100%" }}
                   transition={{ duration: 0.5 }}
                 />
                 <span className="relative z-10">{category}</span>
@@ -126,13 +184,21 @@ export default function PortfolioPage() {
 
         {/* Projects Grid */}
         {isLoading ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-24"
+          >
             <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
               Loading projects...
             </p>
           </motion.div>
         ) : filteredProjects.length === 0 ? (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-24"
+          >
             <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
               No projects found
             </p>
@@ -141,7 +207,10 @@ export default function PortfolioPage() {
             </p>
           </motion.div>
         ) : (
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
                 <motion.div
