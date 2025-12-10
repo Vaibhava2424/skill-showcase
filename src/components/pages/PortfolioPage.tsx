@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { Projects } from '@/entities';
 import { ExternalLink } from 'lucide-react';
-import { projectsList } from '@/data/projectsList';
+import { BaseCrudService } from '@/integrations';
 
 const categories = ['All', 'MERN', 'Responsive', 'AI', 'Other', 'Frontend'];
 
@@ -40,11 +40,19 @@ export default function PortfolioPage() {
   const [projects, setProjects] = useState<Projects[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Projects[]>([]);
   const [activeFilter, setActiveFilter] = useState('All');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setProjects(projectsList);
-    setFilteredProjects(projectsList);
+    loadProjects();
   }, []);
+
+  const loadProjects = async () => {
+    setIsLoading(true);
+    const { items } = await BaseCrudService.getAll<Projects>('projects');
+    setProjects(items);
+    setFilteredProjects(items);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     if (activeFilter === 'All') {
@@ -113,7 +121,17 @@ export default function PortfolioPage() {
         </motion.div>
 
         {/* Projects Grid */}
-        {filteredProjects.length === 0 ? (
+        {isLoading ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-24"
+          >
+            <p className="font-heading uppercase text-xl text-accent-orange tracking-wider mb-4">
+              Loading projects...
+            </p>
+          </motion.div>
+        ) : filteredProjects.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
