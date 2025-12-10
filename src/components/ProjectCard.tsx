@@ -4,7 +4,7 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export interface ProjectCardProps { 
-  id?: string;
+  id?: number;
   title: string;
   description: string;
   image: string;
@@ -62,18 +62,7 @@ export default function ProjectCard({
         </p>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <motion.span
-              key={tag}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="font-heading uppercase text-xs text-black bg-accent-orange px-3 py-1 tracking-wider font-bold"
-            >
-              {tag}
-            </motion.span>
-          ))}
-        </div>
+        
 
         {/* Buttons Section */}
         <div className="flex flex-wrap gap-3 pt-4 border-t border-accent-orange/20">
