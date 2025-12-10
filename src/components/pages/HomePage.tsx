@@ -281,7 +281,7 @@ export default function HomePage() {
                                 Vaibhava
                             </span>
                             <span className="font-heading font-black text-[12vw] md:text-[11vw] text-accent-orange tracking-tighter uppercase md:-mt-4 ml-4 pt-4 pl-4">
-    Raju
+    ////Raju
 </span>
  
                         </h1>
