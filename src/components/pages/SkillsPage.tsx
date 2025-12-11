@@ -123,7 +123,7 @@ const staticSkills: Skills[] = [
     _id: '14',
     skillName: 'Vercel',
     category: 'Cloud and Deployment Platforms',
-    skillImage: 'https://assets.vercel.com/image/upload/v1662130559/front/og-image.png',
+    skillImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Vercel_Logo_White.svg/2048px-Vercel_Logo_White.svg.png',
     description: 'Deploying lightning-fast frontend and Next.js applications with CI/CD and analytics.',
   },
   {
@@ -137,7 +137,7 @@ const staticSkills: Skills[] = [
     _id: '16',
     skillName: 'Render',
     category: 'Cloud and Deployment Platforms',
-    skillImage: 'https://render.com/static/images/logo-white.png',
+    skillImage: 'https://img.logokit.com/render.com',
     description: 'Hosting backend APIs, cron jobs, background tasks, and web services on Render.',
   },
 
