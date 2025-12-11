@@ -167,7 +167,7 @@ const staticSkills: Skills[] = [
     _id: '20',
     skillName: 'Relume',
     category: 'UI/UX & Tools',
-    skillImage: 'https://pbs.twimg.com/profile_images/1747635955183120384/uFuNd2VN_400x400.jpg',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434923/download_lnmjye.png',
     description: 'Building Webflow-ready components, sitemaps, and AI-generated layouts.',
   },
 
