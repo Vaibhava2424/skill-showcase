@@ -274,13 +274,13 @@ export default function HomePage() {
                 <div className="relative w-full text-center">
                     <AnimatedElement className="relative z-20 mix-blend-difference">
                         <h1 className="flex flex-col items-center justify-center leading-[0.85]">
-                             <span className="font-paragraph italic text-3xl sm:text-5xl md:text-7xl lg:text-9xl text-accent-orange self-start sm:self-center sm:-ml-[30%] mb-1 sm:mb-2 md:mb-4">
+                             <span className="font-paragraph italic text-4xl sm:text-5xl md:text-7xl lg:text-9xl text-accent-orange self-start sm:self-center sm:-ml-[30%] mb-1 sm:mb-2 md:mb-4">
                             //     Nadakuditi
                             // </span>
-                            <span className="font-heading font-black text-[10vw] sm:text-[9vw] md:text-[11vw] text-white tracking-tighter uppercase">
+                            <span className="font-heading font-black text-[12vw] sm:text-[9vw] md:text-[11vw] text-white tracking-tighter uppercase">
                                 Vaibhava
                             </span>
-                            <span className="font-paragraph italic font-black text-[10vw] sm:text-[9vw] md:text-7xl lg:text-9xl text-accent-orange tracking-tighter md:-mt-4 ml-2 sm:ml-4 pt-2 sm:pt-4 pl-2 sm:pl-4">
+                            <span className="font-paragraph italic font-black text-[12vw] sm:text-[9vw] md:text-7xl lg:text-9xl text-accent-orange tracking-tighter md:-mt-4 ml-2 sm:ml-4 pt-2 sm:pt-4 pl-2 sm:pl-4">
     // Raju //
 </span>
  
