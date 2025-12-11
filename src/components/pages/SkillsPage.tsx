@@ -355,7 +355,7 @@ export default function SkillsPage() {
               {[
                 { label: skills.length, desc: 'Technical Skills' },
                 { label: Object.keys(groupedSkills).length, desc: 'Skill Categories' },
-                { label: Math.max(...skills.map(s => s.yearsOfExperience || 0)), desc: 'Years Experience' }
+                { label: Math.max(...skills.map(s => s.yearsOfExperience || 1)), desc: 'Years Experience' }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
