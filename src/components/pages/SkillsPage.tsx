@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
+import { BaseCrudService } from '@/integrations';
 import { Skills } from '@/entities';
 
 const skillVariants = {
@@ -17,61 +18,20 @@ const skillVariants = {
   }),
 };
 
-// ---------------------------------------------
-// STATIC SKILLS ARRAY
-// ---------------------------------------------
-const staticSkills: Skills[] = [
-  // Frontend
-  { _id: '1', skillName: 'HTML', category: 'Frontend Development' },
-  { _id: '2', skillName: 'CSS', category: 'Frontend Development' },
-  { _id: '3', skillName: 'JavaScript', category: 'Frontend Development' },
-  { _id: '4', skillName: 'React.js', category: 'Frontend Development' },
-  { _id: '5', skillName: 'Next.js', category: 'Frontend Development' },
-  { _id: '6', skillName: 'Tailwind CSS', category: 'Frontend Development' },
-  { _id: '7', skillName: 'Bootstrap', category: 'Frontend Development' },
-
-  // Backend
-  { _id: '8', skillName: 'Node.js', category: 'Backend Development' },
-  { _id: '9', skillName: 'Express.js', category: 'Backend Development' },
-  { _id: '10', skillName: 'JWT Authentication', category: 'Backend Development' },
-  { _id: '11', skillName: 'REST APIs', category: 'Backend Development' },
-
-  // Databases
-  { _id: '12', skillName: 'MongoDB', category: 'Databases' },
-  { _id: '13', skillName: 'MongoDB Atlas', category: 'Databases' },
-
-  // Cloud
-  { _id: '14', skillName: 'Vercel', category: 'Cloud and Deployment Platforms' },
-  { _id: '15', skillName: 'Netlify', category: 'Cloud and Deployment Platforms' },
-  { _id: '16', skillName: 'Render (Backend Deployment)', category: 'Cloud and Deployment Platforms' },
-
-  // UI / UX
-  { _id: '17', skillName: 'Figma', category: 'UI/UX & Tools' },
-  { _id: '18', skillName: 'Framer', category: 'UI/UX & Tools' },
-  { _id: '19', skillName: 'Builder.io', category: 'UI/UX & Tools' },
-  { _id: '20', skillName: 'Relume', category: 'UI/UX & Tools' },
-
-  // Other
-  { _id: '21', skillName: 'Git', category: 'Other Technical Skills' },
-  { _id: '22', skillName: 'GitHub', category: 'Other Technical Skills' },
-  { _id: '23', skillName: 'Linux Basics', category: 'Other Technical Skills' },
-  { _id: '24', skillName: 'API Integration', category: 'Other Technical Skills' },
-];
-
 export default function SkillsPage() {
   const [skills, setSkills] = useState<Skills[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // ---------------------------------------------
-  // LOAD STATIC SKILLS (NO DATABASE)
-  // ---------------------------------------------
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setSkills(staticSkills);
-      setIsLoading(false);
-    }, 300);
+    loadSkills();
   }, []);
+
+  const loadSkills = async () => {
+    setIsLoading(true);
+    const { items } = await BaseCrudService.getAll<Skills>('skills');
+    setSkills(items);
+    setIsLoading(false);
+  };
 
   const groupedSkills = skills.reduce((acc, skill) => {
     const category = skill.category || 'Other';
@@ -173,16 +133,18 @@ export default function SkillsPage() {
                               />
                             </motion.div>
                           )}
-
+                          
                           <h3 className="font-heading uppercase text-2xl text-accent-orange tracking-wider font-black mb-3">
                             {skill.skillName}
                           </h3>
-
+                          
                           {skill.description && (
                             <p className="font-paragraph italic text-base text-light-gray mb-4">
                               {skill.description}
                             </p>
                           )}
+                          
+
                         </motion.div>
                       </motion.div>
                     ))}
