@@ -123,7 +123,7 @@ const staticSkills: Skills[] = [
     _id: '14',
     skillName: 'Vercel',
     category: 'Cloud and Deployment Platforms',
-    skillImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Vercel_Logo_White.svg/2048px-Vercel_Logo_White.svg.png',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434139/download_zzhf3m.png',
     description: 'Deploying lightning-fast frontend and Next.js applications with CI/CD and analytics.',
   },
   {
