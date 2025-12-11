@@ -1,12 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
+
+  const navItems = [
+    { path: '/skills', label: 'Skills', shortLabel: 'S' },
+    { path: '/portfolio', label: 'Work', shortLabel: 'W' },
+    { path: '/certificates', label: 'Certs', shortLabel: 'C' }
+  ];
 
   return (
     <header className="w-full bg-black border-b border-accent-orange/30">
@@ -27,24 +36,20 @@ export default function Header() {
             />
           </Link>
           
-          <div className="flex gap-3 md:gap-8 items-center ml-auto">
-            {[
-              { path: '/skills', label: 'Skills', shortLabel: 'S' },
-              { path: '/portfolio', label: 'Work', shortLabel: 'W' },
-              { path: '/certificates', label: 'Certs', shortLabel: 'C' }
-            ].map((item) => (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-8 items-center ml-auto">
+            {navItems.map((item) => (
               <Link 
                 key={item.path}
                 to={item.path}
                 className="relative group flex-shrink-0"
               >
-                <span className={`font-heading uppercase text-xs md:text-sm tracking-wider transition-colors ${
+                <span className={`font-heading uppercase text-sm tracking-wider transition-colors ${
                   isActive(item.path) 
                     ? 'text-accent-orange' 
                     : 'text-light-gray group-hover:text-accent-orange'
                 }`}>
-                  <span className="md:hidden">{item.shortLabel}</span>
-                  <span className="hidden md:inline">{item.label}</span>
+                  {item.label}
                 </span>
                 {isActive(item.path) && (
                   <motion.div
@@ -56,7 +61,50 @@ export default function Header() {
               </Link>
             ))}
           </div>
+
+          {/* Mobile Hamburger Menu */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden flex-shrink-0 text-accent-orange hover:text-accent-orange-soft transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="flex flex-col gap-4 pt-4 border-t border-accent-orange/30">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`font-heading uppercase text-sm tracking-wider transition-colors ${
+                      isActive(item.path)
+                        ? 'text-accent-orange'
+                        : 'text-light-gray hover:text-accent-orange'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
