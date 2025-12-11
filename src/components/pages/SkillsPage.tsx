@@ -183,7 +183,7 @@ const staticSkills: Skills[] = [
     _id: '22',
     skillName: 'GitHub',
     category: 'Other Technical Skills',
-    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765435596/Screenshot_2025-12-11_121618_fcms93.png',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765435698/images_u1vnf4.png',
     description: 'Hosting repositories, reviewing pull requests, and managing CI/CD pipelines.',
   },
   {
