@@ -353,9 +353,9 @@ export default function SkillsPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { label: skills.length, desc: 'Technical Skills' },
-                { label: Object.keys(groupedSkills).length, desc: 'Skill Categories' },
-                { label: Math.max(...skills.map(s => s.yearsOfExperience || 1)), desc: 'Years Experience' }
+                { label: skills.length -1 , desc: 'Technical Skills' },
+                { label: Object.keys(groupedSkills).length -1, desc: 'Skill Categories' },
+                { label: Math.max(...skills.map(s => s.yearsOfExperience -1 || 1)), desc: 'Years Experience' }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
