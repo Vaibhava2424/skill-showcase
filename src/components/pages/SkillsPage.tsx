@@ -91,7 +91,7 @@ const staticSkills: Skills[] = [
     _id: '10',
     skillName: 'JWT Authentication',
     category: 'Backend Development',
-    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434410/download_sojhde.png',
+    skillImage: 'https://img.icons8.com/ios-filled/100/ffffff/secured-letter.png',
     description: 'Implementing secure authentication, authorization, and token-based user access.',
   },
   {
