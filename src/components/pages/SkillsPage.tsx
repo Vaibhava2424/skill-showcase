@@ -153,7 +153,7 @@ const staticSkills: Skills[] = [
     _id: '18',
     skillName: 'Framer',
     category: 'UI/UX & Tools',
-    skillImage: 'https://seeklogo.com/images/F/framer-logo-DCB351BF98-seeklogo.com.png',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434745/download_hsbvur.png',
     description: 'Creating animated prototypes and full no-code websites using Framer features.',
   },
   {
