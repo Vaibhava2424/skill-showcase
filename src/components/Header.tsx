@@ -16,8 +16,8 @@ export default function Header() {
             to="/" 
             className="group relative flex-shrink-0"
           >
-            <span className="font-heading uppercase text-lg md:text-2xl font-bold text-accent-orange tracking-wider whitespace-nowrap">
-              Port<span className="hidden sm:inline">/</span>Web
+            <span className="font-heading text-lg md:text-2xl font-bold text-accent-orange tracking-wider whitespace-nowrap">
+              PortWeb
             </span>
             <motion.div
               className="absolute bottom-0 left-0 h-0.5 bg-accent-orange"
