@@ -246,25 +246,25 @@ export default function HomePage() {
       <main>
         {/* --- HERO SECTION --- */}
         {/* Replicating structure of "The MOOD SWINGER" */}
-        <section className="relative w-full min-h-screen flex flex-col justify-center items-center pt-16 md:pt-20 pb-8 md:pb-12 px-4 md:px-8 overflow-hidden">
+        <section className="relative w-full min-h-screen flex flex-col justify-center items-center pt-8 sm:pt-12 md:pt-20 pb-6 sm:pb-8 md:pb-12 px-3 sm:px-4 md:px-8 overflow-hidden">
             
-            {/* Background Gradient Mesh */}
-            <div className="absolute inset-0 z-0 opacity-20">
-                <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-accent-orange rounded-full blur-[120px] animate-pulse duration-[10s]" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-accent-orange-soft rounded-full blur-[100px]" />
+            {/* Background Gradient Mesh - Enhanced for mobile */}
+            <div className="absolute inset-0 z-0 opacity-30 sm:opacity-20">
+                <div className="absolute top-[-20%] left-[-10%] w-[80vw] sm:w-[60vw] h-[80vw] sm:h-[60vw] bg-accent-orange rounded-full blur-[100px] sm:blur-[120px] animate-pulse duration-[10s]" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] sm:w-[50vw] h-[70vw] sm:h-[50vw] bg-accent-orange-soft rounded-full blur-[80px] sm:blur-[100px]" />
             </div>
 
             <div className="relative z-10 w-full max-w-[110rem] mx-auto flex flex-col items-center">
                 
                 {/* Top Row Text */}
-                <div className="w-full flex justify-between items-end mb-2 md:mb-8 px-2 gap-2">
+                <div className="w-full flex justify-between items-end mb-1 sm:mb-4 md:mb-8 px-2 gap-2">
                     <AnimatedElement delay={200}>
-                        <span className="font-heading font-bold text-[10px] md:text-sm tracking-[0.15em] text-accent-orange uppercase whitespace-nowrap">
+                        <span className="font-heading font-bold text-[8px] sm:text-xs md:text-sm tracking-[0.15em] text-accent-orange uppercase whitespace-nowrap">
                             Port<span className="hidden sm:inline">folio</span> 2025
                         </span>
                     </AnimatedElement>
                     <AnimatedElement delay={400}>
-                        <span className="font-heading font-bold text-[10px] md:text-sm tracking-[0.15em] text-white uppercase whitespace-nowrap">
+                        <span className="font-heading font-bold text-[8px] sm:text-xs md:text-sm tracking-[0.15em] text-white uppercase whitespace-nowrap">
                             Avail<span className="hidden sm:inline">able for</span> Hire
                         </span>
                     </AnimatedElement>
@@ -288,7 +288,7 @@ export default function HomePage() {
                     </AnimatedElement>
 
                     {/* Central Image - Abstract Animated Artwork */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[140px] sm:w-[200px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[260px] md:w-[350px] lg:w-[450px] aspect-[3/4] z-10 pointer-events-none">
                         <motion.div 
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -336,7 +336,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Bottom Row Info */}
-                <div className="w-full flex justify-between items-end mt-12 md:mt-24 px-2">
+                <div className="w-full flex justify-between items-end mt-8 sm:mt-16 md:mt-24 px-2">
                     <AnimatedElement delay={600} className="max-w-xs hidden md:block">
                         <p className="font-paragraph text-medium-gray text-sm leading-relaxed">
                             Specializing in high-performance React applications and immersive digital experiences.
