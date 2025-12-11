@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { BaseCrudService } from '@/integrations';
 import { Skills } from '@/entities';
 
 const skillVariants = {
@@ -18,20 +17,210 @@ const skillVariants = {
   }),
 };
 
+// ---------------------------------------------
+// STATIC SKILLS ARRAY
+// ---------------------------------------------
+const staticSkills: Skills[] = [
+  // Frontend
+  {
+    _id: '1',
+    skillName: 'HTML',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?html,code',
+    description: 'Creating structured, semantic, and accessible markup for modern web applications.',
+  },
+  {
+    _id: '2',
+    skillName: 'CSS',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?css,design',
+    description: 'Crafting responsive, elegant UI layouts with animations, grids, and modern styling techniques.',
+  },
+  {
+    _id: '3',
+    skillName: 'JavaScript',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?javascript,programming',
+    description: 'Building interactive client-side logic, DOM manipulation, and asynchronous functionalities.',
+  },
+  {
+    _id: '4',
+    skillName: 'React.js',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?reactjs,webdev',
+    description:
+      'Building interactive and dynamic user interfaces using components, hooks, and state management.',
+  },
+  {
+    _id: '5',
+    skillName: 'Next.js',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?nextjs,framework',
+    description:
+      'Developing fast, SEO-friendly applications with SSR, routing, API routes, and server components.',
+  },
+  {
+    _id: '6',
+    skillName: 'Tailwind CSS',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?tailwind,ui',
+    description:
+      'Building modern, responsive UI with utility-first classes and customizable design systems.',
+  },
+  {
+    _id: '7',
+    skillName: 'Bootstrap',
+    category: 'Frontend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?bootstrap,ui',
+    description: 'Creating responsive layouts quickly using components, grid systems, and utilities.',
+  },
+
+  // Backend
+  {
+    _id: '8',
+    skillName: 'Node.js',
+    category: 'Backend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?nodejs,backend',
+    description: 'Building scalable, event-driven backend services using JavaScript on the server.',
+  },
+  {
+    _id: '9',
+    skillName: 'Express.js',
+    category: 'Backend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?expressjs,api',
+    description: 'Developing REST APIs, routing, middleware, and backend architecture with Express.',
+  },
+  {
+    _id: '10',
+    skillName: 'JWT Authentication',
+    category: 'Backend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?jwt,security',
+    description: 'Implementing secure authentication, authorization, and token-based user access.',
+  },
+  {
+    _id: '11',
+    skillName: 'REST APIs',
+    category: 'Backend Development',
+    skillImage: 'https://source.unsplash.com/80x80/?api,rest',
+    description: 'Designing and integrating scalable API endpoints for frontend and mobile apps.',
+  },
+
+  // Databases
+  {
+    _id: '12',
+    skillName: 'MongoDB',
+    category: 'Databases',
+    skillImage: 'https://source.unsplash.com/80x80/?mongodb,database',
+    description:
+      'Storing and retrieving application data using NoSQL collections, documents, and schemas.',
+  },
+  {
+    _id: '13',
+    skillName: 'MongoDB Atlas',
+    category: 'Databases',
+    skillImage: 'https://source.unsplash.com/80x80/?cloud,database',
+    description: 'Deploying and scaling cloud-hosted databases with monitoring and backup automation.',
+  },
+
+  // Cloud & Deployment
+  {
+    _id: '14',
+    skillName: 'Vercel',
+    category: 'Cloud and Deployment Platforms',
+    skillImage: 'https://source.unsplash.com/80x80/?vercel,cloud',
+    description: 'Deploying lightning-fast frontend and Next.js applications with CI/CD and analytics.',
+  },
+  {
+    _id: '15',
+    skillName: 'Netlify',
+    category: 'Cloud and Deployment Platforms',
+    skillImage: 'https://source.unsplash.com/80x80/?netlify,hosting',
+    description: 'Deploying static sites, handling forms, and managing serverless functions.',
+  },
+  {
+    _id: '16',
+    skillName: 'Render (Backend)',
+    category: 'Cloud and Deployment Platforms',
+    skillImage: 'https://source.unsplash.com/80x80/?server,hosting',
+    description: 'Hosting backend APIs, cron jobs, background tasks, and web services on Render.',
+  },
+
+  // UI/UX Tools
+  {
+    _id: '17',
+    skillName: 'Figma',
+    category: 'UI/UX & Tools',
+    skillImage: 'https://source.unsplash.com/80x80/?figma,design',
+    description: 'Designing user interfaces, prototypes, wireframes, and collaborative design flows.',
+  },
+  {
+    _id: '18',
+    skillName: 'Framer',
+    category: 'UI/UX & Tools',
+    skillImage: 'https://source.unsplash.com/80x80/?framer,design',
+    description: 'Creating animated prototypes and full no-code websites using Framer features.',
+  },
+  {
+    _id: '19',
+    skillName: 'Builder.io',
+    category: 'UI/UX & Tools',
+    skillImage: 'https://source.unsplash.com/80x80/?webdesign,builder',
+    description: 'Developing visual pages and components with drag-and-drop integrated workflows.',
+  },
+  {
+    _id: '20',
+    skillName: 'Relume',
+    category: 'UI/UX & Tools',
+    skillImage: 'https://source.unsplash.com/80x80/?ui,ux',
+    description: 'Building Webflow-ready components, sitemaps, and AI-generated layouts.',
+  },
+
+  // Other Skills
+  {
+    _id: '21',
+    skillName: 'Git',
+    category: 'Other Technical Skills',
+    skillImage: 'https://source.unsplash.com/80x80/?git,versioncontrol',
+    description: 'Managing project versions, branches, commits, and collaborative workflows.',
+  },
+  {
+    _id: '22',
+    skillName: 'GitHub',
+    category: 'Other Technical Skills',
+    skillImage: 'https://source.unsplash.com/80x80/?github,code',
+    description: 'Hosting repositories, reviewing pull requests, and managing CI/CD pipelines.',
+  },
+  {
+    _id: '23',
+    skillName: 'Linux Basics',
+    category: 'Other Technical Skills',
+    skillImage: 'https://source.unsplash.com/80x80/?linux,terminal',
+    description: 'Working with file systems, permissions, commands, and server-side environments.',
+  },
+  {
+    _id: '24',
+    skillName: 'API Integration',
+    category: 'Other Technical Skills',
+    skillImage: 'https://source.unsplash.com/80x80/?api,integration',
+    description: 'Connecting third-party services, handling JSON, and implementing external endpoints.',
+  },
+];
+
+
 export default function SkillsPage() {
   const [skills, setSkills] = useState<Skills[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // ---------------------------------------------
+  // LOAD STATIC SKILLS (NO DATABASE)
+  // ---------------------------------------------
   useEffect(() => {
-    loadSkills();
-  }, []);
-
-  const loadSkills = async () => {
     setIsLoading(true);
-    const { items } = await BaseCrudService.getAll<Skills>('skills');
-    setSkills(items);
-    setIsLoading(false);
-  };
+    setTimeout(() => {
+      setSkills(staticSkills);
+      setIsLoading(false);
+    }, 300);
+  }, []);
 
   const groupedSkills = skills.reduce((acc, skill) => {
     const category = skill.category || 'Other';
@@ -133,18 +322,16 @@ export default function SkillsPage() {
                               />
                             </motion.div>
                           )}
-                          
+
                           <h3 className="font-heading uppercase text-2xl text-accent-orange tracking-wider font-black mb-3">
                             {skill.skillName}
                           </h3>
-                          
+
                           {skill.description && (
                             <p className="font-paragraph italic text-base text-light-gray mb-4">
                               {skill.description}
                             </p>
                           )}
-                          
-
                         </motion.div>
                       </motion.div>
                     ))}
