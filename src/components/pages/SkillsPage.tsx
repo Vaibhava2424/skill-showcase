@@ -160,7 +160,7 @@ const staticSkills: Skills[] = [
     _id: '19',
     skillName: 'Builder.io',
     category: 'UI/UX & Tools',
-    skillImage: 'https://avatars.githubusercontent.com/u/51912656?s=200&v=4',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765435362/Screenshot_2025-12-11_121218_eeryrt.png',
     description: 'Developing visual pages and components with drag-and-drop integrated workflows.',
   },
   {
