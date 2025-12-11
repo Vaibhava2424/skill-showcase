@@ -183,7 +183,7 @@ const staticSkills: Skills[] = [
     _id: '22',
     skillName: 'GitHub',
     category: 'Other Technical Skills',
-    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765435698/images_u1vnf4.png',
+    skillImage: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
     description: 'Hosting repositories, reviewing pull requests, and managing CI/CD pipelines.',
   },
   {
@@ -197,7 +197,7 @@ const staticSkills: Skills[] = [
     _id: '24',
     skillName: 'API Integration',
     category: 'Other Technical Skills',
-    skillImage: 'https://img.icons8.com/ios-filled/100/api-settings.png',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765435698/images_u1vnf4.png',
     description: 'Connecting third-party services, handling JSON, and implementing external endpoints.',
   },
 ];
