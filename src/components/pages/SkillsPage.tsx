@@ -84,7 +84,7 @@ const staticSkills: Skills[] = [
     _id: '9',
     skillName: 'Express.js',
     category: 'Backend Development',
-    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434594/download_gqpsml.jpg',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434636/download_eeshlq.png',
     description: 'Developing REST APIs, routing, middleware, and backend architecture with Express.',
   },
   {
