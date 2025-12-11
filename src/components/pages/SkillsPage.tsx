@@ -61,7 +61,7 @@ const staticSkills: Skills[] = [
     _id: '6',
     skillName: 'Tailwind CSS',
     category: 'Frontend Development',
-    skillImage: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+    skillImage: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg',
     description: 'Building modern, responsive UI with utility-first classes and customizable design systems.',
   },
   {
@@ -91,14 +91,14 @@ const staticSkills: Skills[] = [
     _id: '10',
     skillName: 'JWT Authentication',
     category: 'Backend Development',
-    skillImage: 'https://img.icons8.com/ios-filled/100/secured-letter.png',
+    skillImage: 'https://img.icons8.com/ios-filled/100/ffffff/secured-letter.png',
     description: 'Implementing secure authentication, authorization, and token-based user access.',
   },
   {
     _id: '11',
     skillName: 'REST APIs',
     category: 'Backend Development',
-    skillImage: 'https://img.icons8.com/ios-filled/100/api.png',
+    skillImage: 'https://img.icons8.com/ios-filled/100/ffffff/api.png',
     description: 'Designing and integrating scalable API endpoints for frontend and mobile apps.',
   },
 
@@ -123,7 +123,7 @@ const staticSkills: Skills[] = [
     _id: '14',
     skillName: 'Vercel',
     category: 'Cloud and Deployment Platforms',
-    skillImage: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg',
+    skillImage: 'https://assets.vercel.com/image/upload/v1662130559/front/og-image.png',
     description: 'Deploying lightning-fast frontend and Next.js applications with CI/CD and analytics.',
   },
   {
@@ -137,7 +137,7 @@ const staticSkills: Skills[] = [
     _id: '16',
     skillName: 'Render',
     category: 'Cloud and Deployment Platforms',
-    skillImage: 'https://dashboard.render.com/public/images/brand/icon.png',
+    skillImage: 'https://render.com/static/images/logo-white.png',
     description: 'Hosting backend APIs, cron jobs, background tasks, and web services on Render.',
   },
 
