@@ -137,7 +137,7 @@ const staticSkills: Skills[] = [
     _id: '16',
     skillName: 'Render',
     category: 'Cloud and Deployment Platforms',
-    skillImage: 'https://img.logokit.com/render.com',
+    skillImage: 'https://res.cloudinary.com/dodfv5sbg/image/upload/v1765434195/download_nxaet8.png',
     description: 'Hosting backend APIs, cron jobs, background tasks, and web services on Render.',
   },
 
