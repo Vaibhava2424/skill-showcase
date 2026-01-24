@@ -68,10 +68,20 @@ const EXPERTISE_DATA: ExpertiseItem[] = [
 const PROFILE_DATA = {
   name: 'Vaibhava Raju Nadakuditi',
   role: 'Creative Full-Stack Developer',
-  bio: ' I am a versatile full-stack developer with expertise in Python, JavaScript, TypeScript, React.js, Next.js, and Linux. I have built projects like Tasty Kitchen (full stack with APIs), Jobby App (frontend), Tourism Website (HTML, Bootstrap), Food Munch (HTML, CSS), TechTrends India (React.js), Law Guide (team project with legal APIs), and SubTrack (UI/UX for subscription tracking). Skilled in API integration, responsive design, and cloud hosting, I focus on delivering scalable, user-friendly, and innovative digital products.',
+  bio: `
+I am a versatile full-stack developer skilled in Python, JavaScript, TypeScript, React.js, Next.js, Node.js, and Linux. I have built projects such as Tasty Kitchen, Jobby App, Tourism Website, Food Munch, TechTrends India, Law Guide, SubTrack, and Webflow designs.  
+
+In college, I worked on robotics projects like a Smart Segregation Bin and contributed to 4+ workshops on AI, robotics, and digital design. I also gained hands-on experience during my internship, focusing on full-stack development, cloud deployments, and modern workflows.  
+
+My expertise includes frontend & backend development, databases, API integration, responsive design, and cloud hosting. I aim to deliver scalable, user-friendly, and innovative digital products while exploring emerging technologies with real-world impact.
+`,
   location: 'Hyderabad',
   email: 'vaibhava2424@gmail.com',
-  about: 'With over 1 year of experience in web development, I\'ve worked on diverse projects ranging from e-commerce platforms to interactive digital experiences. My approach combines clean code architecture with modern design principles to create applications that not only function flawlessly but also delight users.',
+  about: `I am a passionate web developer and tech enthusiast with over a year of hands-on experience in building modern, interactive web applications. Currently, I am interning while pursuing college projects in robotics, including a Smart Segregation Bin, and expanding my skills in Webflow and UI/UX design.
+
+I have actively contributed as a volunteer in 4+ workshops, gaining practical experience in AI, robotics, and digital design. My approach combines clean code, modern design principles, and user-centric thinking to deliver applications that are both functional and engaging.
+
+I am always exploring new technologies and building innovative solutions that make an impact.`,
   education: [
     { institution: 'NxtWave CCBP 4.0 – NIAT Program', field: 'Software Development', year: '2024' },
     { institution: 'BITS Hyderabad', field: 'B.Sc Computer Science', year: '2024' }
