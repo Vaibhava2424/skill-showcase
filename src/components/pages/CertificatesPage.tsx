@@ -22,26 +22,43 @@ const staticCertificates: Certificates[] = [
     id: 1,
     title: 'Ethical Hacking 101 Workshop',
     description: 'Comprehensive workshop covering ethical hacking principles, penetration testing methodologies, and security best practices.',
-    liveUrl: 'https://example.com/ethical-hacking-101',
+    liveUrl: 'https://cdn1.ccbp.in/misc/niat_ethical_101_part/M0RWF5X8PJ.png',
     fallbackText: 'links yet to be added',
   },
   {
     _id: '2',
     id: 2,
+    title: 'UI/UX Participation Certificate',
+    description: 'Participation certificate for completing the UI/UX project/workshop.',
+    liveUrl: 'https://cdn1.ccbp.in/misc/UI_UX_participation/U9XIAM43IO.png',
+    fallbackText: 'links yet to be added',
+  },
+  {
+    _id: '3',
+    id: 3,
+    title: 'UI/UX Accomplishment Certificate',
+    description: 'Accomplishment certificate for completing the UI/UX project/workshop successfully.',
+    liveUrl: 'https://cdn1.ccbp.in/misc/UI_UX_Accomplishment/OHPF52ZIC2.png',
+    fallbackText: 'links yet to be added',
+  },
+  {
+    _id: '4',
+    id: 4,
     title: 'The MCP Magic Workshop',
     description: 'An introductory session exploring how MCP-style automation streamlines workflows and enhances digital efficiency. Designed to help participants understand intelligent control systems and their practical applications.',
     liveUrl: '',
     fallbackText: 'links yet to be added',
   },
   {
-    _id: '3',
-    id: 3,
+    _id: '5',
+    id: 5,
     title: 'Robotic Arm 101 Workshop',
     description: 'A foundational workshop introducing robotic arm mechanisms, motion control, and real-world automation. Helps participants understand how robotic arms operate and how they are programmed for precision tasks.',
     liveUrl: '',
     fallbackText: 'links yet to be added',
   },
 ];
+
 
 export default function CertificatesPage() {
   const certificates = staticCertificates;

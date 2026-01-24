@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
-import { BaseCrudService } from '@/integrations';
-import { Projects } from '@/entities';
 import { ArrowLeft, ExternalLink, Calendar, Code2, Github } from 'lucide-react';
 import { format } from 'date-fns';
 import { ProjectCardProps } from '@/components/ProjectCard';
@@ -200,7 +198,7 @@ const staticProjects: ProjectCardProps[] =  [
 
 export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<ProjectCardProps | Projects | null>(null);
+  const [project, setProject] = useState<ProjectCardProps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -219,14 +217,9 @@ export default function ProjectDetailPage() {
       return;
     }
 
-    // Load from CMS
-    try {
-      const projectData = await BaseCrudService.getById<Projects>('projects', projectId);
-      setProject(projectData);
-    } catch (error) {
-      console.error('Project not found:', error);
-      setProject(null);
-    }
+    // Project not found
+    console.error('Project not found');
+    setProject(null);
     setIsLoading(false);
   };
 
@@ -271,10 +264,8 @@ export default function ProjectDetailPage() {
 
   // Type guards
   const isStaticProject = (p: any): p is ProjectCardProps => 'id' in p && 'image' in p;
-  const isCMSProject = (p: any): p is Projects => '_id' in p && 'thumbnail' in p;
 
   const staticProj = isStaticProject(project) ? project : null;
-  const cmsProj = isCMSProject(project) ? project : null;
 
   return (
     <div className="min-h-screen bg-black">
@@ -330,7 +321,7 @@ export default function ProjectDetailPage() {
           </div>
 
           {/* Project Image */}
-          {(cmsProj?.thumbnail || staticProj?.image) && (
+          {staticProj?.image && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -338,7 +329,7 @@ export default function ProjectDetailPage() {
               className="relative w-full aspect-[16/9] mb-12 overflow-hidden bg-charcoal"
             >
               <Image
-                src={cmsProj?.thumbnail || staticProj?.image || ''}
+                src={staticProj?.image || ''}
                 alt={project.title || 'Project image'}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 width={1600}
@@ -359,7 +350,7 @@ export default function ProjectDetailPage() {
               </h2>
 
               <div className="space-y-6">
-                {(staticProj?.tags || cmsProj?.technologies) && (
+                {staticProj?.tags && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -372,7 +363,7 @@ export default function ProjectDetailPage() {
                           Technologies
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {(staticProj?.tags || (cmsProj?.technologies?.split(',') || [])).map((tech: string) => (
+                          {staticProj?.tags.map((tech: string) => (
                             <span key={tech} className="font-heading uppercase text-xs text-black bg-accent-orange px-3 py-1 tracking-wider font-bold">
                               {tech.trim()}
                             </span>
@@ -383,27 +374,7 @@ export default function ProjectDetailPage() {
                   </motion.div>
                 )}
 
-                {cmsProj?.completionDate && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                  >
-                    <div className="flex items-start gap-3">
-                      <Calendar className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="font-heading uppercase text-sm text-medium-gray tracking-wider mb-2 opacity-70">
-                          Completion Date
-                        </p>
-                        <p className="font-paragraph italic text-lg text-light-gray">
-                          {format(new Date(cmsProj.completionDate), 'MMMM yyyy')}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {(cmsProj?.projectUrl || staticProj?.liveUrl) && (
+                {staticProj?.liveUrl && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -413,7 +384,7 @@ export default function ProjectDetailPage() {
                       Live Project
                     </p>
                     <a
-                      href={cmsProj?.projectUrl || staticProj?.liveUrl || '#'}
+                      href={staticProj?.liveUrl || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 font-heading uppercase text-sm text-accent-orange tracking-wider hover:text-accent-orange-soft transition-colors group"

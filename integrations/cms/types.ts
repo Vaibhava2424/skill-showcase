@@ -1,4 +1,15 @@
-import { items } from "@wix/data";
+export type WixDataItem = {
+  _id?: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+};
 
-export type WixDataItem = items.WixDataItem;
-export type WixDataQueryResult = items.WixDataResult;
+export type WixDataQueryResult<T> = {
+  items: T[];
+  totalCount: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+  pageSize: number;
+  currentPage: number;
+  totalPages: number;
+};

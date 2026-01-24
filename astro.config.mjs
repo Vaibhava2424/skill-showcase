@@ -1,19 +1,12 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import cloudProviderFetchAdapter from "@wix/cloud-provider-fetch-adapter";
-import wix from "@wix/astro";
-import monitoring from "@wix/monitoring-astro";
 import react from "@astrojs/react";
-import sourceAttrsPlugin from "@wix/babel-plugin-jsx-source-attrs";
-import dynamicDataPlugin from "@wix/babel-plugin-jsx-dynamic-data";
 import customErrorOverlayPlugin from "./vite-error-overlay-plugin.js";
-
-const isBuild = process.env.NODE_ENV == "production";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "static",
   integrations: [
     {
       name: "framewire",
@@ -38,24 +31,15 @@ export default defineConfig({
       },
     },
     tailwind(),
-    wix({
-      htmlEmbeds: isBuild,
-      auth: true
-    }),
-    isBuild ? monitoring() : undefined,
-    react({ babel: { plugins: [sourceAttrsPlugin, dynamicDataPlugin] } }),
+    react(),
   ],
   vite: {
     plugins: [
       customErrorOverlayPlugin(),
     ],
   },
-  adapter: isBuild ? cloudProviderFetchAdapter({}) : undefined,
   devToolbar: {
     enabled: false,
-  },
-  image: {
-    domains: ["static.wixstatic.com"],
   },
   server: {
     allowedHosts: true,

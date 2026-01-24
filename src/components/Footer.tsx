@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -31,35 +32,32 @@ export default function Footer() {
             <div className="space-y-2">
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
                 
-                <a
-  href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/portfolio"
-  rel="noopener noreferrer"
+                <Link
+  to="/portfolio"
   className="text-accent-orange hover:underline"
 >
   Portfolio
-</a>
+</Link>
 
               </p>
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
                 
-                <a
-  href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/skills"
-  rel="noopener noreferrer"
+                <Link
+  to="/skills"
   className="text-accent-orange hover:underline"
 >
   Skills
-</a>
+</Link>
 
               </p>
               <p className="font-paragraph italic text-base text-light-gray hover:text-accent-orange transition-colors cursor-pointer">
                 
-                <a
-  href="https://my-site-qhs2v4m9-nvaibhavarajnadaku.wix-vibe.com/certificates"
-  rel="noopener noreferrer"
+                <Link
+  to="/certificates"
   className="text-accent-orange hover:underline"
 >
   Certifications
-</a>
+</Link>
 
               </p>
             </div>

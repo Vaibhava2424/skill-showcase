@@ -73,14 +73,6 @@ export default [
       'no-restricted-syntax': [
         'error',
         {
-          selector: 'JSXElement[openingElement.name.name="Route"] JSXText[value="Wix Vibe"]',
-          message: 'Routes are not implemented. The default "Wix Vibe" route is still present, which means pages are probably not visible to the user. Please implement proper routes for your application.',
-        },
-        {
-          selector: 'CallExpression[callee.name="createBrowserRouter"] JSXElement[openingElement.name.name="div"] JSXText[value="Wix Vibe"]',
-          message: 'Routes are not implemented. The default "Wix Vibe" route is still present, which means pages are probably not visible to the user. Please implement proper routes for your application.',
-        },
-        {
           selector:
             'CallExpression[callee.name="createBrowserRouter"] > ArrayExpression.arguments ' +
             '> ObjectExpression:has(Property[key.name="path"] > Literal[value="/"]) ' +
