@@ -27,6 +27,20 @@ const staticProjects: ProjectCardProps[] =  [
   },
   {
     id: 2,
+    title: "Nxtrends App",
+    description:
+      "NxtTrends is a responsive e-commerce web application built using React.js with JWT authentication, protected routes, and REST API integration. Features include product browsing, search, filters, sorting, product details, and cart management, delivering a seamless online shopping experience across devices.",
+    liveUrl: "https://nxttrends-phi.vercel.app/",
+    githubUrl: {
+      frontend: "https://github.com/Vaibhava2424/Nxttrends",
+    },
+    image:
+      "https://res.cloudinary.com/dodfv5sbg/image/upload/v1781541091/Screenshot_2026-06-15_220021_kvslzz.png",
+    tags: ["React.js", "JavaScript", "REST API", "JWT", "React Router", "Bootstrap", "CSS", "Git"],
+    category: "frontend",
+  },
+  {
+    id: 3,
     title: "Law Guide",
     description:
       "A team project developed during a no-code hackathon to provide structured legal information on government schemes, IPC sections, and public legal resources. Built entirely using AI-powered tools, it offers an intuitive interface, real-time policy insights, and smooth navigation. I contributed to content structuring, UI/UX, and flow logic.",
@@ -37,7 +51,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "AI",
   },
   {
-    id: 3,
+    id: 4,
     title: "SubTrack",
     description:
       "A UI/UX subscription-tracking project designed to simplify OTT management for users. It includes features like subscription reminders, trending content suggestions, discount coupons, and AI-powered enhancements. Designed in Figma for a seamless and visually clean user flow.",
@@ -49,7 +63,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "other",
   },
   {
-    id: 4,
+    id: 5,
     title: "Nextjs Project",
     description:
       "A simple e-commerce front-end built with Next.js, featuring multi-page navigation, product listings, and a clean responsive UI. The platform includes pages for Home, About, Products, Cart, and Feedback, offering users a smooth browsing experience. Integrated with dynamic routing and modern layouts, it serves as a foundation for future e-commerce expansion.",
@@ -63,7 +77,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "frontend",
   },
   {
-    id: 5,
+    id: 6,
     title: "AI Chatbot",
     description:
       "Developed a functional AI chatbot capable of interacting with users and answering queries in real-time. Built using BotPress tools, integrated NLP features, and tested through real-time chat previews. Focused on improving conversational design, automation, and AI workflows.",
@@ -105,7 +119,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "mern",
   },
   {
-    id: 6,
+    id: 9,
     title: "Food Munch",
     description:
       "A personal project where I developed a food-centric website to bring together food lovers and culinary enthusiasts. Built using HTML and CSS, it showcases recipes, food blogs, and trending dishes in a visually appealing and user-friendly layout.",
@@ -118,7 +132,7 @@ const staticProjects: ProjectCardProps[] =  [
 
   // SMALL PROJECTS
   {
-    id: 9,
+    id: 10,
     title: "Multi-Consultancy Webpage",
     description:
       "A professional consultancy-style landing page featuring a responsive layout, service highlights, and structured content sections.",
@@ -129,7 +143,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "responsive",
   },
   {
-    id: 10,
+    id: 11,
     title: "Nature Tourism Page",
     description:
       "A nature-themed tourism landing page built with Bootstrap grids and mobile-first layout.",
@@ -140,7 +154,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "responsive",
   },
   {
-    id: 11,
+    id: 12,
     title: "Wikipedia Search Engine",
     description:
       "A real-time Wikipedia search application using Fetch API to pull search results with dynamic DOM rendering.",
@@ -151,7 +165,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "other",
   },
   {
-    id: 12,
+    id: 13,
     title: "Number Guess Game",
     description:
       "A fun interactive guessing game built using JavaScript logic and DOM manipulation.",
@@ -162,7 +176,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "other",
   },
   {
-    id: 13,
+    id: 14,
     title: "Wedding Celebration Page",
     description:
       "A vibrant and festive wedding theme page built with Bootstrap and custom UI blocks.",
@@ -173,7 +187,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "responsive",
   },
   {
-    id: 14,
+    id: 15,
     title: "Tech Trends Showcase",
     description:
       "A technology-trends themed website created with Bootstrap and supported by AI-assisted design tools.",
@@ -184,7 +198,7 @@ const staticProjects: ProjectCardProps[] =  [
     category: "AI",
   },
   {
-    id: 15,
+    id: 16,
     title: "FitPro Fitness Page",
     description:
       "A responsive fitness landing page showcasing workout services, trainers, and brand hero section.",
