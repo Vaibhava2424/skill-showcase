@@ -8,8 +8,8 @@ import { ArrowLeft, ExternalLink, Calendar, Code2, Github } from 'lucide-react';
 import { format } from 'date-fns';
 import { ProjectCardProps } from '@/components/ProjectCard';
 
-// Static projects array
-const staticProjects: ProjectCardProps[] =  [
+// Shared projects array used by the portfolio listing and detail view
+export const staticProjects: ProjectCardProps[] = [
   {
     id: 1,
     title: "Jobby App",
